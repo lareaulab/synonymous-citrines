@@ -1,0 +1,33 @@
+,,1,2,3,4,5,6,7,8,9,10,11,12
+A,Content,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn
+A,Sample,Cit9,Cit9,Cit9,Cit9,Cit9,Cit9,CitMax,CitMax,CitMax,CitMax,CitMax,CitMax
+A,Peak 1,80.5,80.5,80.5,84.5,84.5,85,83.5,83.5,83.5,84.5,84.5,85
+A,Peak 2,None,None,None,None,None,None,None,None,None,None,None,None
+B,Content,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn
+B,Sample,Cit9,Cit9,Cit9,Cit9,Cit9,Cit9,CitMax,CitMax,CitMax,CitMax,CitMax,CitMax
+B,Peak 1,80.5,80.5,80.5,84.5,84.5,84.5,83.5,83.5,83.5,84.5,84.5,85
+B,Peak 2,None,None,None,None,None,None,None,None,None,None,None,None
+C,Content,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn
+C,Sample,Cit9,Cit9,Cit9,Cit9,Cit9,Cit9,CitMax,CitMax,CitMax,CitMax,CitMax,CitMax
+C,Peak 1,80.5,80.5,80.5,84.5,84.5,84.5,83.5,83.5,83.5,84.5,84.5,85
+C,Peak 2,None,None,None,None,None,None,None,None,None,None,None,None
+D,Content,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn
+D,Sample,J-Cit9,J-Cit9,J-Cit9,J-Cit9,J-Cit9,J-Cit9,J-CitMax,J-CitMax,J-CitMax,J-CitMax,J-CitMax,J-CitMax
+D,Peak 1,80.5,80.5,80.5,84.5,84.5,84.5,83.5,83.5,83.5,84.5,85,85
+D,Peak 2,None,None,None,None,None,None,None,None,None,None,None,None
+E,Content,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn
+E,Sample,J-Cit9,J-Cit9,J-Cit9,J-Cit9,J-Cit9,J-Cit9,J-CitMax,J-CitMax,J-CitMax,J-CitMax,J-CitMax,J-CitMax
+E,Peak 1,80.5,80.5,80.5,84.5,84.5,84.5,83.5,83.5,83.5,84.5,85,85
+E,Peak 2,None,None,None,None,None,None,None,None,None,None,None,None
+F,Content,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn
+F,Sample,J-Cit9,J-Cit9,J-Cit9,J-Cit9,J-Cit9,J-Cit9,J-CitMax,J-CitMax,J-CitMax,J-CitMax,J-CitMax,J-CitMax
+F,Peak 1,80.5,80.5,80.5,84.5,84.5,84.5,83.5,83.5,83.5,84.5,84.5,85
+F,Peak 2,None,None,None,None,None,None,None,None,None,None,None,None
+G,Content,,,,,,,,,,,,
+G,Sample,,,,,,,,,,,,
+G,Peak 1,,,,,,,,,,,,
+G,Peak 2,,,,,,,,,,,,
+H,Content,NTC,NTC,NTC,NTC,NTC,NTC,NTC,NTC,NTC,,,
+H,Sample,NTC,NTC,NTC,NTC,NTC,NTC,NTC,NTC,NTC,,,
+H,Peak 1,None,None,None,None,None,None,None,None,None,,,
+H,Peak 2,None,None,None,None,None,None,None,None,None,,,

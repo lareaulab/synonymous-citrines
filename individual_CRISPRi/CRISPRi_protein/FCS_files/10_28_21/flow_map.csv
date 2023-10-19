@@ -1,0 +1,9 @@
+,1,2,3,4,5,6,7,8,9,10,11,12
+A,100-A-ci-SCD,100-B-ci-SCD,100-C-ci-SCD,100-A-c9-SCD,100-B-c9-SCD,100-C-c9-SCD,100-A-ci-tet,100-B-ci-tet,100-C-ci-tet,100-A-c9-tet,100-B-c9-tet,100-C-c9-tet
+B,106-A-ci-SCD,106-B-ci-SCD,106-C-ci-SCD,106-A-c9-SCD,106-B-c9-SCD,106-C-c9-SCD,106-A-ci-tet,106-B-ci-tet,106-C-ci-tet,106-A-c9-tet,106-B-c9-tet,106-C-c9-tet
+C,101-A-ci-SCD,101-B-ci-SCD,101-C-ci-SCD,101-A-c9-SCD,101-B-c9-SCD,101-C-c9-SCD,101-A-ci-tet,101-B-ci-tet,101-C-ci-tet,101-A-c9-tet,101-B-c9-tet,101-C-c9-tet
+D,104-A-ci-SCD,104-B-ci-SCD,104-C-ci-SCD,104-A-c9-SCD,104-B-c9-SCD,104-C-c9-SCD,104-A-ci-tet,104-B-ci-tet,104-C-ci-tet,104-A-c9-tet,104-B-c9-tet,104-C-c9-tet
+E,105-A-ci-SCD,105-B-ci-SCD,105-C-ci-SCD,105-A-c9-SCD,105-B-c9-SCD,105-C-c9-SCD,105-A-ci-tet,105-B-ci-tet,105-C-ci-tet,105-A-c9-tet,105-B-c9-tet,105-C-c9-tet
+F,109-A-ci-SCD,109-B-ci-SCD,109-C-ci-SCD,109-A-c9-SCD,109-B-c9-SCD,109-C-c9-SCD,109-A-ci-tet,109-B-ci-tet,109-C-ci-tet,109-A-c9-tet,109-B-c9-tet,109-C-c9-tet
+G,WT-WT-WT-SCD,mCh-mCh-mCh-SCD,ci-ci-ci-SCD,c9-c9-c9-SCD,,,110-A-ci-tet,110-B-ci-tet,110-C-ci-tet,110-A-c9-tet,110-B-c9-tet,110-C-c9-tet
+H,102-A-ci-tet,102-B-ci-tet,102-C-ci-tet,102-A-c9-tet,102-B-c9-tet,102-C-c9-tet,,,,,,

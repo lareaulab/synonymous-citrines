@@ -1,0 +1,33 @@
+,,1,2,3,4,5,6,7,8,9,10,11,12
+A,Content,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn
+A,Sample,HO-Ci,HO-Ci,HO-Ci,HO-C9,HO-C9,HO-C9,HO-Ci,HO-Ci,HO-Ci,HO-C9,HO-C9,HO-C9
+A,Peak 1,81,81,81,80.5,80.5,80.5,84.5,84.5,84.5,84.5,84.5,85
+A,Peak 2,None,None,None,None,None,None,None,None,None,None,None,None
+B,Content,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn
+B,Sample,HO-Ci,HO-Ci,HO-Ci,HO-C9,HO-C9,HO-C9,HO-Ci,HO-Ci,HO-Ci,HO-C9,HO-C9,HO-C9
+B,Peak 1,81,81,81,80.5,80.5,80.5,84.5,84.5,84.5,84.5,84.5,84.5
+B,Peak 2,None,None,None,None,None,None,None,None,None,None,None,None
+C,Content,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn
+C,Sample,HO-Ci,HO-Ci,HO-Ci,HO-C9,HO-C9,HO-C9,HO-Ci,HO-Ci,HO-Ci,HO-C9,HO-C9,HO-C9
+C,Peak 1,81,81,81,80.5,80.5,80.5,84.5,84.5,84.5,84.5,84.5,84.5
+C,Peak 2,None,None,None,None,None,None,None,None,None,None,None,None
+D,Content,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn
+D,Sample,RPG1-Ci,RPG1-Ci,RPG1-Ci,RPG1-C9,RPG1-C9,RPG1-C9,RPG1-Ci,RPG1-Ci,RPG1-Ci,RPG1-C9,RPG1-C9,RPG1-C9
+D,Peak 1,81,81,81,80.5,80.5,80.5,84.5,84.5,84.5,84.5,84.5,85
+D,Peak 2,None,None,None,None,None,None,None,None,None,None,None,None
+E,Content,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn
+E,Sample,RPG1-Ci,RPG1-Ci,RPG1-Ci,RPG1-C9,RPG1-C9,RPG1-C9,RPG1-Ci,RPG1-Ci,RPG1-Ci,RPG1-C9,RPG1-C9,RPG1-C9
+E,Peak 1,81,81,81,80.5,80.5,80.5,84.5,84.5,84.5,84.5,84.5,85
+E,Peak 2,None,None,None,None,None,None,None,None,None,None,None,None
+F,Content,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn,Unkn
+F,Sample,RPG1-Ci,RPG1-Ci,RPG1-Ci,RPG1-C9,RPG1-C9,RPG1-C9,RPG1-Ci,RPG1-Ci,RPG1-Ci,RPG1-C9,RPG1-C9,RPG1-C9
+F,Peak 1,81,81,81,80.5,80.5,80.5,84.5,84.5,84.5,84.5,84.5,85
+F,Peak 2,None,None,None,None,None,None,None,None,None,None,None,None
+G,Content,NTC,NTC,NTC,NTC,NTC,NTC,NTC,NTC,NTC,,,
+G,Sample,NTC,NTC,NTC,NTC,NTC,NTC,NTC,NTC,NTC,,,
+G,Peak 1,None,None,None,None,None,None,None,80,None,,,
+G,Peak 2,None,None,None,None,None,None,None,None,None,,,
+H,Content,,,,,,,,,,,,
+H,Sample,,,,,,,,,,,,
+H,Peak 1,,,,,,,,,,,,
+H,Peak 2,,,,,,,,,,,,
