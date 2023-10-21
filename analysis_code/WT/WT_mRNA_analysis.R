@@ -1,15 +1,9 @@
 ##re-analysis of citrine mRNA qPCR data from Tunney, McGlincey, et al 2018
 ## uses delta delta Cq method (efficiency = 2) 
 
-setwd(".../data/WT/WT_mRNA/")
+setwd("../data/WT/WT_mRNA/")
 
-#citrine_construct_scores_fname <- "citrine_construct_scores.txt"
-citrine_construct_scores_fname <- "../citrine_scores_full_model.tsv"
-
-# cit <- read.delim(citrine_construct_scores_fname, header = T, row.names = 1, comment.char = "#")
-# cit.scores <- cit$nn.score
-# names(cit.scores) <- row.names(cit)
-#namemap <- c(MIN = "MIN", Y00 = "Y000", Y33 = "Y333", Y66 = "Y666", Y99 = "Y999", MAX = "MAX")
+citrine_construct_scores_fname <- "../../citrine_scores_full_model.tsv"
 
 cit <- read.delim(citrine_construct_scores_fname, header=F, row.names = 1)
 names(cit) = c("time")
@@ -76,4 +70,4 @@ ratios <- within( ratios, ratio <- 2^-ddcq )
 #ratios <- within( ratios, citscore <- cit.scores[strain] )
 ratios <- within( ratios, citscore <- cit[strain,] )
 
-write.csv(ratios, ".../WT_mRNA_ratios.csv", row.names=FALSE)
+write.csv(ratios, "WT_mRNA_ratios.csv", row.names=FALSE)
