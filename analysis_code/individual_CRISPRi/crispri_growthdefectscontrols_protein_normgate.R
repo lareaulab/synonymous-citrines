@@ -14,8 +14,8 @@ library(tidyverse)
 
 plots_on <- F
 
-setwd(".../data/individual_CRISPRi/growth_defect_controls/")
-dir <- ".../data/individual_CRISPRi/growth_defect_controls/"
+setwd("../../data/individual_CRISPRi/growth_defect_controls/")
+dir <- "../../data/individual_CRISPRi/growth_defect_controls/"
 
 guide_key <- read.csv('guide_key.csv', row.names = 1, header = F, col.names = c("strain","gene","alias"))
 

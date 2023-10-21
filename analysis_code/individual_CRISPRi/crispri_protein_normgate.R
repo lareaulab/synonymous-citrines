@@ -14,9 +14,9 @@ library(tidyverse)
 
 plots_on <- F
 
-setwd(".../data/individual_CRISPRi/CRISPRi_protein/FCS_files/")
+setwd("../../data/individual_CRISPRi/CRISPRi_protein/")
 
-guide_key <- read.csv("../guide_key.csv", row.names = 1, header = F, col.names = c("strain","gene","alias"))
+guide_key <- read.csv("guide_key.csv", row.names = 1, header = F, col.names = c("strain","gene","alias"))
 
 # Set variable names for flow data files - must correspond to .fcs file parameters
 var.names <- c("FSC.A","FSC.H", "SSC.A", "SSC.H", "Citrine.A", "Citrine.H", "mCherry.A", "mCherry.H", "time")
@@ -114,4 +114,4 @@ data$mCherry.cor <- data$mCherry.H - mchbackground$median
 
 data$ratio <- data$Citrine.cor / data$mCherry.cor
 
-write_csv(data, "../crispri_normgated_data_bg_corrected.csv")
+write_csv(data, "crispri_normgated_data_bg_corrected.csv")
