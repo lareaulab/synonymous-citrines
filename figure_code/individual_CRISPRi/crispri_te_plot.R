@@ -1,12 +1,12 @@
 ##plotting TE with error bars for HO, RPG1, and FUN12 CRISPRi
-setwd(".../data/individual_CRISPRi/")
+setwd("../../data/individual_CRISPRi/")
 
 plot_fc <- read.csv("ratios_for_CRISPRi_te.csv")
 plot_se <- read.csv("standard_error_for_CRISPRi_te.csv")
 
 cols <- c(mRNA = "lightgrey", protein = "darkgrey")
 
-pdf("crispri_mrna_protein_se.pdf", width = 2, height = 1.67, pointsize = 7, useDingbats = F, bg = "white" )
+pdf("../../figures/crispri_te.pdf", width = 2, height = 1.67, pointsize = 7, useDingbats = F, bg = "white" )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(7,6.5,4,3) )
 par( oma = c(0,0.5,1,0) )

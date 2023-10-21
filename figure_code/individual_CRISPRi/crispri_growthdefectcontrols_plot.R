@@ -1,9 +1,9 @@
 library(plyr)
 library(tidyverse)
 
-setwd(".../data/individual_CRISPRi/growth_defect_controls/")
+setwd("../../data/individual_CRISPRi/growth_defect_controls/")
 
-datafile <- (".../crispri_growth_defect_controls_normgated_data.csv")
+datafile <- ("crispri_growth_defect_controls_normgated_data.csv")
 data = read.csv( datafile, header=T)
 
 medians <- aggregate( ratio ~ clone + cit + gene + media, data, median) #medians of cit/mcherry ratios for each strain in each condition for each clone
@@ -52,7 +52,7 @@ c9ci_ratios_reordered <- c9ci_ratios %>% arrange(gene)
 mediacols <- c("#39c0c4", "#99cccc")
 gene.labels <- c("CDC6", "IRRI")
 
-pdf("c9ciratio_induceduninduced_growthcontrols.pdf", width = 2, height = 1.67, pointsize = 7, useDingbats = F, bg = "white" )
+pdf("../../../figures/c9ciratio_induceduninduced_growthcontrols.pdf", width = 2, height = 1.67, pointsize = 7, useDingbats = F, bg = "white" )
 #set margin stuff
 par( mex = 0.65 ) 
 par( mar = c(6,6.5,5,9) )
