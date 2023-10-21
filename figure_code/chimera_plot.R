@@ -5,11 +5,11 @@
 library(plyr)
 library(tidyverse)
 
-setwd("data/RQC_knockouts_and_chimeras/")
+setwd("../data/RQC_knockouts_and_chimeras/")
 
 namemap <- c( ci = 'citmin', c9 = 'cit9', Sphinx = 'slowfast', Lion = 'fastslow')
 
-gated <- read.csv(".../chimeras_normgated_data_bg_corrected.csv", header=T)
+gated <- read.csv("chimeras_normgated_data_bg_corrected.csv", header=T)
 
 ratios <- aggregate( ratio ~ sample + clone + cit + strain, gated, median)
 
@@ -18,21 +18,10 @@ ratios$cit <- namemap[ ratios$cit ]
 
 averages <- aggregate( ratio ~ cit, ratios, mean) # average of the three points
 
-citrine_construct_scores_fname <- "../citrine_scores_full_model.tsv"
+citrine_construct_scores_fname <- "../codon_scores/citrine_scores_full_model.tsv"
 cit <- read.delim(citrine_construct_scores_fname, header=F, row.names = 1)
 names(cit) = c("time")
 
-
-# from Helen - scored with mini-iXnos model. 
-# times <- c( ci = 214.7, Sphinx = 250.1, Lion = 259.2, c9 = 294.6 )
-# # put them on the same arbitrary scale as original iXnos times
-# oldmin <- 164.6626
-# old9 <- 302.6384
-# newspan <- sort(times)[length(times)] - sort(times)[1]
-# oldspan <- old9 - oldmin
-# fractimes <- (times - times[1])/newspan
-# times <- oldmin + fractimes * oldspan
-# xpoints <- times[ ratios$cit ]
 
 xpoints <- cit[ ratios$cit, ]
 
@@ -43,7 +32,7 @@ cols <- c( citmin = 'magenta3', cit9 = 'darkorange2', slowfast = 'darkgray', fas
 firsthalf <- c( citmin = 'magenta3', cit9 = 'darkorange2', slowfast = 'darkorange2', fastslow = 'magenta3' )
 secondhalf <- c( citmin = 'magenta3', cit9 = 'darkorange2', slowfast = 'magenta3', fastslow = 'darkorange2' )
 
-pdf("chimeras_flow.newspeeds.pdf", width = 2.5, height = 1.67, pointsize = 7, useDingbats = F, bg="white" )
+pdf("../../figures/chimeras_flow.newspeeds.pdf", width = 2.5, height = 1.67, pointsize = 7, useDingbats = F, bg="white" )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(7,6.5,4,10) )
 par( oma = c(0,0.5,1,0) )

@@ -11,12 +11,12 @@ library(flowViz)
 library(plyr)
 library(tidyverse)
 
-setwd(".../data/RQC_knockouts_and_chimeras/")
+setwd("../data/RQC_knockouts_and_chimeras/")
 PrimaryDirectory <- getwd()
 
 plots_on <- FALSE
 
-flow_map_file = "../flow_map.csv"
+flow_map_file = "flow_map.csv"
 
 #Import and gate flow data - run on all .fcs files in the working directory folder 
 #Set variable names for flow data files - must correspond to .fcs file parameters
@@ -38,18 +38,18 @@ flowDataGated <- flowCore::Subset( flowData, normresults )
 # diagnostic plots of flow data
 if(plots_on == TRUE) {
   #plot data with gates
-  png( "../fsc-ssc-normgates.png", width = 20, height = 20, units = "in", res = 300 )
+  png( "fsc-ssc-normgates.png", width = 20, height = 20, units = "in", res = 300 )
   print( xyplot( `SSC.A` ~ `FSC.A`, data = flowData, smooth = FALSE, filter = normresults, ylim = c(0,20000), xlim = c(0,100000) ))
   dev.off()
   # plot gated data only
-  png( "../fsc-ssc-normgated-only.png", width = 20, height = 20, units = "in", res = 300 )
+  png( "fsc-ssc-normgated-only.png", width = 20, height = 20, units = "in", res = 300 )
   print( xyplot( `SSC.A` ~ `FSC.A`, data = flowDataGated, smooth = FALSE, ylim = c(0,20000), xlim = c(0,100000) ))
   dev.off()
   # plot gated fluorescence data only
-  png("../fluor-normgated-only.png", width = 20, height = 20, units = "in", res = 300 )
+  png("fluor-normgated-only.png", width = 20, height = 20, units = "in", res = 300 )
   print( xyplot( `Citrine.H` ~ `mCherry.H`, data = flowDataGated, smooth = FALSE, ylim = c(0,2000), xlim = c(0,10000) ))
   dev.off()
-  png("../fluor-all.png", width = 20, height = 20, units = "in", res = 300 )
+  png("fluor-all.png", width = 20, height = 20, units = "in", res = 300 )
   print( xyplot( `Citrine.H` ~ `mCherry.H`, data = flowData, smooth = FALSE, ylim = c(0,2000), xlim = c(0,10000) ))
   dev.off()
 }
@@ -99,5 +99,5 @@ gated_data$mCherry.cor <- gated_data$mCherry.H - mchbackground$median
 # ratio of citrine to mCherry for each data point
 gated_data$ratio <- with( gated_data, Citrine.cor / mCherry.cor)
 
-write_csv(gated_data, "../RQCknockouts_normgated_data_bg_corrected.csv")
+write_csv(gated_data, "RQCknockouts_normgated_data_bg_corrected.csv")
 

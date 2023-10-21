@@ -6,12 +6,10 @@ library(flowViz)
 library(plyr)
 library(tidyverse)
 
-setwd(".../data/WT/WT_protein/")
+setwd("../../data/WT/WT_protein/")
 
 sample_info <- "sample-info.csv"
-#citrine_construct_scores_fname <- "../citrine_construct_scores.txt"
-citrine_construct_scores_fname <- "../../citrine_scores_full_model.tsv"
-
+citrine_construct_scores_fname <- "../../codon_scores/citrine_scores_full_model.tsv"
 
 var.names <- c("FSC.A", "SSC.A", "Citrine.A", "mCherry.A", "time") # FITC, PE-Texas Red
 plots_on = T
@@ -99,4 +97,4 @@ means <- aggregate( ratio ~ Strain, ratios, mean)
 rename <- c( "000" = "cit0", "333" = "cit3", "666" = "cit6", "999" = "cit9", "MAX" = "citmax", "MIN" = "citmin")
 ratios$Strain <- rename[ratios$Strain]
 
-write.csv(ratios, ".../WT_protein_ratios.csv", row.names=FALSE)
+write.csv(ratios, "WT_protein_ratios.csv", row.names=FALSE)

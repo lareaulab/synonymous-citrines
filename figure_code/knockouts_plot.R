@@ -4,9 +4,11 @@
 library(plyr)
 library(tidyverse)
 
-setwd(".../data/knockouts_chimeras/")
+setwd("..")
+datadir <- "data/RQC_knockouts_and_chimeras/"
+figdir <- "figures/"
 
-gated <- read.csv("RQCknockouts_normgated_data_bg_corrected.csv", header = T)
+gated <- read.csv(paste0( datadir, "RQCknockouts_normgated_data_bg_corrected.csv"), header = T)
 
 ratios <- aggregate( ratio ~ sample + clone + cit + strain, gated, median)
 
@@ -33,7 +35,7 @@ labels <- c(expression(paste(italic('gcn1'), Delta)),
             "WT")
 
 #pdf("knockout_flow.pdf", width = 4, height = 1.67, pointsize = 7, useDingbats = F, bg = "white" )
-pdf("knockout_flow.pdf", width = 3.5, height = 1.4, pointsize = 6.5, useDingbats = F, bg = "white" )
+pdf( paste0(figdir, "knockout_flow.pdf"), width = 3.5, height = 1.4, pointsize = 6.5, useDingbats = F, bg = "white" )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(9,6.5,2,10) )
 par( oma = c(0,0.5,1,0) )
