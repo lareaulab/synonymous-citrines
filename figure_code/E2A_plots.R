@@ -1,9 +1,12 @@
 library(tidyverse)
 library(dplyr)
 
-setwd("..../data/E2A/")
+setwd("..")
 
-datafile <- (".../E2A_normgated_data_corrected.csv")
+datadir <- "data/E2A/"
+figdir <- "figures/"
+
+datafile <- paste0( datadir, "E2A_normgated_data_corrected.csv")
 gated = read.csv( datafile, header=T)
 
 #verifying that the cit/mch is actually divided that way:
@@ -57,7 +60,7 @@ ind.labels <- c( "cit/iRFP", "mCh/iRFP")
 
 scaled.matrix <- as.matrix( medians.avg.scaled[, 2:4])
 
-pdf("e2a_scaled.pdf", width = 2, height = 1.3, pointsize = 6.5, useDingbats = F, bg = "white" )
+pdf( paste0( figdir, "figures/e2a_scaled.pdf"), width = 2, height = 1.3, pointsize = 6.5, useDingbats = F, bg = "white" )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(4,6.5,4,5) )
 par( oma = c(0,0.5,1,0) )
@@ -66,59 +69,13 @@ mp = barplot( scaled.matrix,
               beside = TRUE,
               col = colslight,
               ylab = "fluorescence ratio\n(scaled)",
+              ylim = c(0, 1),
               border = NA, axes = F,
-              #ylim = c(0, 2.5),
               names.arg = all.labels)
-#axis(2, seq(0,2.5,0.5))
-axis(2, lwd = 0.75)
+axis(2, at = c(0, 0.5, 1), lwd = 0.75)
 points( x = rep(as.numeric(mp), each = 3), 
         y = c( medians.scaled$cit.iRFP, medians.scaled$mCh.iRFP, medians.scaled$cit.mCh ),
         pch = 20, col = rep( colsdark, each = 3 ))
 legend( "topright", legend = c("slow citrine", "fast citrine"), 
          fill = colslight, border = NA, bty = "n", inset = c( -0.2, -0.5 ))
 dev.off()
-
-pdf("e2a_all.pdf", width = 2, height = 1.2, pointsize = 6.5, useDingbats = F, bg = "white" )
-par( mex = 0.65 ) # sets margin stuff
-par( mar = c(4,6.5,4,5) )
-par( oma = c(0,0.5,1,0) )
-par( xpd = NA )
-mp = barplot( all.matrix, 
-              beside = TRUE,
-              col = colslight,
-              ylab = "fluorescence ratio",
-              border = NA, axes = F,
-              #ylim = c(0, 2.5),
-              names.arg = all.labels)
-#axis(2, seq(0,2.5,0.5))
-axis(2)
-points( x = rep(as.numeric(mp), each = 3), 
-        y = c( medians$cit.iRFP, medians$mCh.iRFP, medians$cit.mCh ),
-        pch = 20, col = rep( colsdark, each = 3 ))
-legend( "topright", legend = c("slow citrine", "fast citrine"), 
-        fill = colslight, border = NA, bty = "n", inset = c( -0.2, -0.5 ))
-dev.off()
-
-
-pdf("e2a_cit_mch.pdf", width = 1.5, height = 1, pointsize = 6.5, useDingbats = F, bg = "white" )
-par( mex = 0.65 ) # sets margin stuff
-par( mar = c(3,6.5,2,4) )
-par( oma = c(0,0.5,1,0) )
-par( xpd = NA )
-mp = barplot( ind.matrix, 
-              beside = TRUE,
-              col = colslight,
-              ylab = "fluorescence ratio",
-              border = NA, axes = F,
-              ylim = c(0, 2.5),
-              names.arg = ind.labels)
-axis(2, seq(0,2.5,0.5))
-points( x = rep(as.numeric(mp), each = 3), 
-        y = c( medians$cit.iRFP, medians$mCh.iRFP ),
-        pch = 20, col = rep( colsdark, each = 3 ))
-# legend( x=6, y=2, legend = c("slow citrine", "fast citrine"), 
-#         fill = colslight, border = NA, bty = "n", inset = c( -0.2, -0.5 ))
-dev.off()
-
-  
-  
