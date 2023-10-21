@@ -8,8 +8,8 @@ library(tidyverse)
 
 
 #Load Data
-setwd(".../data/E2A")
-flow_map_file = ".../flow_map.csv"
+setwd("data/E2A/")
+flow_map_file = "flow_map.csv"
 
 PrimaryDirectory <- getwd()
 plots_on <- FALSE
@@ -36,18 +36,18 @@ flowDataGated <- flowCore::Subset( flowData, normresults )
 # diagnostic plots of flow data
 if(plots_on == TRUE) {
   #plot data with gates
-  png( "../fsc-ssc-normgates.png", width = 20, height = 20, units = "in", res = 300 )
+  png( "fsc-ssc-normgates.png", width = 20, height = 20, units = "in", res = 300 )
   print( xyplot( `SSC.A` ~ `FSC.A`, data = flowData, smooth = FALSE, filter = normresults, ylim = c(0,20000), xlim = c(0,100000) ))
   dev.off()
   # plot gated data only
-  png( "../fsc-ssc-normgated-only.png", width = 20, height = 20, units = "in", res = 300 )
+  png( "fsc-ssc-normgated-only.png", width = 20, height = 20, units = "in", res = 300 )
   print( xyplot( `SSC.A` ~ `FSC.A`, data = flowDataGated, smooth = FALSE, ylim = c(0,20000), xlim = c(0,100000) ))
   dev.off()
   # plot gated fluorescence data only
-  png("../fluor-normgated-only.png", width = 20, height = 20, units = "in", res = 300 )
+  png("fluor-normgated-only.png", width = 20, height = 20, units = "in", res = 300 )
   print( xyplot( `Citrine.H` ~ `mCherry.H`, data = flowDataGated, smooth = FALSE, ylim = c(0,2000), xlim = c(0,10000) ))
   dev.off()
-  png("../fluor-all.png", width = 20, height = 20, units = "in", res = 300 )
+  png("fluor-all.png", width = 20, height = 20, units = "in", res = 300 )
   print( xyplot( `Citrine.H` ~ `mCherry.H`, data = flowData, smooth = FALSE, ylim = c(0,2000), xlim = c(0,10000) ))
   dev.off()
 }
@@ -111,7 +111,7 @@ gated_data$cit.mCh.ratio.A.raw <- with( gated_data, Citrine.cor / mCherry.cor)
 
 gated_data <- na.omit(gated_data)
 
-write_csv(gated_data, "../E2A_normgated_data_corrected.csv")
+write_csv(gated_data, "E2A_normgated_data_corrected.csv")
 
 ci_ratio <- gated_data %>%
   filter(cit == "citMin") %>%
@@ -133,6 +133,6 @@ all_data_medians <- gated_data %>%
             mCh.raw = median(mCherry.cor),
             cit.mCh.raw = median(cit.mCh.ratio.A.raw))
 
-write_csv(all_data_medians, "../E2A_medians.csv")
+write_csv(all_data_medians, "E2A_medians.csv")
 
 
