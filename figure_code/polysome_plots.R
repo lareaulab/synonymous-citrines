@@ -1,6 +1,6 @@
 ##plotting the normalized citrine read counts from RNAseq data of each polysome fraction over the potential traces from the fractionation
 
-setwd( ".../data/polysomes/" )
+setwd( "../../data/polysomes/" )
 
 traceB <- read.delim( "fractionation_traces/WTi9-B-i.csv", header = T, sep = ",", col.names = c("time", "potential") )
 traceC <- read.delim( "fractionation_traces/WTi9-C-i.csv", header = T, sep = ",", col.names = c("time", "potential") )
@@ -44,7 +44,7 @@ midpointsC <- sapply( 1:5, function(i)( (divC[i] + divC[i+1])/2 ) )
 yticks = seq(0, 0.6, by = 0.2)
 cols = c( slow = "darkorange2", fast = "magenta3")
 
-pdf("polysome_rep_B.pdf", width = 2.5, height = 1.67, pointsize = 7, useDingbats = F, bg = "white" )
+pdf("../../figures/polysome_rep_B.pdf", width = 2.5, height = 1.67, pointsize = 7, useDingbats = F, bg = "white" )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(7,1,2,6) )
 par( oma = c(0,0.5,1,0.5) )
@@ -68,7 +68,7 @@ mtext("mRNA as fraction of total", side = 4, line = 3.5)
 mtext("replicate 1", 3, adj = 0)
 dev.off()
 
-pdf("polysome_rep_C.pdf", width = 2.5, height = 1.67, pointsize = 7, useDingbats = F, bg = "white" )
+pdf("../../figures/polysome_rep_C.pdf", width = 2.5, height = 1.67, pointsize = 7, useDingbats = F, bg = "white" )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(7,1,2,6) )
 par( oma = c(0,0.5,1,0.5) )
