@@ -3,10 +3,10 @@ library(dplyr)
 library(tidyverse)
 library(readxl)
 
-setwd(".../data/stemloop/SL_mRNA/")
+setwd("../../data/stemloop/SL_mRNA/")
 
 #load in data
-datafile <- (".../J.WT.mRNA.csv.csv")
+datafile <- ("J.WT.mRNA.csv")
 BioReps = read.csv( datafile, header=T)
 
 #prepping data for plotting
@@ -24,7 +24,7 @@ wt.avg = aggregate( NormalizedLogTransform ~ Cit + Strain + elongation_rate, rat
 j.avg = aggregate( NormalizedLogTransform ~ Cit + Strain + elongation_rate, ratios[ratios$Strain == "HC1J",], mean)
 
 #main figure mRNA plot
-pdf("HPvsWT_mrna_withaverages.pdf", width = 2, height = 1.67, pointsize = 7, useDingbats = F, bg = "white" )
+pdf("../../../figures/HPvsWT_mrna_withaverages.pdf", width = 2, height = 1.67, pointsize = 7, useDingbats = F, bg = "white" )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(7,6.5,4,3) )
 par( oma = c(0,0.5,1,0) )
@@ -79,7 +79,7 @@ HP.WTratios <- divided$ratio
 trend <- lm(HP.WTratios~rates)
 
 #plot:
-pdf("HPvsWT_mrna_ratios.pdf", width = 2, height = 1.67, pointsize = 7, useDingbats = F, bg = "white" )
+pdf("../../../figures/HPvsWT_mrna_ratios.pdf", width = 2, height = 1.67, pointsize = 7, useDingbats = F, bg = "white" )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(7,6.5,4,3) )
 par( oma = c(0,0.5,1,0) )
@@ -127,7 +127,7 @@ normed.wt.avg = aggregate( normedmRNA ~ Cit + Strain + elongation_time, normedBi
 normed.j.avg = aggregate( normedmRNA ~ Cit + Strain + elongation_time, normedBioReps[normedBioReps$Strain == "HC1J",], mean)
 
 #plot
-pdf("HPvsWT.mRNA.normedtocitMax.pdf", width = 2, height = 1.67, pointsize = 7, useDingbats = F, bg = "white" )
+pdf("../../../figures/HPvsWT.mRNA.normedtocitMax.pdf", width = 2, height = 1.67, pointsize = 7, useDingbats = F, bg = "white" )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(7,6.5,4,3) )
 par( oma = c(0,0.5,1,0) )

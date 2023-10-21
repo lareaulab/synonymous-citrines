@@ -4,7 +4,7 @@ library(dplyr)
 library(tidyverse)
 library(readxl)
 
-setwd(".../data/stemloop/SL_mRNA/")
+setwd("../../data/stemloop/SL_mRNA/")
 
 #Assign the sample name to each well so that I can get a Cq value for them. 
 #Function to be able to match each plate to its Cq value sheet, 
@@ -47,9 +47,9 @@ return(qPCRdata)
 
 #Organizing directories:
 mainfolderpath <- ".../data/stemloop/SL_mRNA/"
-minzerofolderpath <- ".../data/stemloop/SL_mRNA/Citmin,Cit0"
-threesixfolderpath <- ".../data/stemloop/SL_mRNA/Cit3,Cit6"
-ninemaxfolderpath <- ".../data/stemloop/SL_mRNA/Cit9,CitMax"
+minzerofolderpath <- ".../data/stemloop/SL_mRNA/Citmin_Cit0"
+threesixfolderpath <- ".../data/stemloop/SL_mRNA/Cit3_Cit6"
+ninemaxfolderpath <- ".../data/stemloop/SL_mRNA/Cit9_CitMax"
   
 mapname <- "PlateMap.xlsx"
 samplenames <- file.path(mainfolderpath, mapname)
@@ -108,5 +108,5 @@ SeparateCqs <- SeparateCqs %>% rename("CqStd.mCh" = "CqStd.y")
 BioReps <- subset(SeparateCqs, select = c(Strain, Cit, Clone))
 BioReps$NormalizedLogTransform <- SeparateCqs$LogTransform.Cit/SeparateCqs$LogTransform.mCh
 
-write.csv(BioReps, ".../data/stemloop/SL_mRNA/J.WT.mRNA.csv", row.names=FALSE) 
+write.csv(BioReps, "J.WT.mRNA.csv", row.names=FALSE) 
 

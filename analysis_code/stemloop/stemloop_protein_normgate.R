@@ -4,12 +4,12 @@ library(flowViz)
 library(plyr)
 library(tidyverse)
 
-setwd("data/stemloop/SL_protein/FCS_files/")
+setwd("../../data/stemloop/SL_protein/FCS_files/")
 PrimaryDirectory <- getwd()
 
 plots_on <- FALSE
 
-flow_map_file = "../RelabelledPlateMap.csv"
+flow_map_file = "../PlateMap.csv"
 
 #Import and gate flow data - run on all .fcs files in the working directory folder 
 #Set variable names for flow data files - must correspond to .fcs file parameters
@@ -33,14 +33,14 @@ flowDataGated <- flowCore::Subset( flowData, normresults )
 # diagnostic plots of flow data
 if(plots_on == TRUE) {
   #plot data with gates
-  png( "../fsc-ssc-normgates.png", width = 20, height = 20, units = "in", res = 300 )
+  png( "fsc-ssc-normgates.png", width = 20, height = 20, units = "in", res = 300 )
   print( xyplot( `SSC.A` ~ `FSC.A`, data = flowData, smooth = FALSE, filter = normresults))#, ylim = c(0,90000), xlim = c(0,30000) ))
   dev.off()
   # plot gated fluorescence data only
-  png("../fluor-normgated-only.png", width = 20, height = 20, units = "in", res = 300 )
+  png("fluor-normgated-only.png", width = 20, height = 20, units = "in", res = 300 )
   print( xyplot( `Citrine.A` ~ `mCherry.A`, data = flowDataGated, smooth = FALSE, ylim = c(0,2000), xlim = c(0,10000) ))
   dev.off()
-  png("../fluor-all.png", width = 20, height = 20, units = "in", res = 300 )
+  png("fluor-all.png", width = 20, height = 20, units = "in", res = 300 )
   print( xyplot( `Citrine.A` ~ `mCherry.A`, data = flowData, smooth = FALSE, ylim = c(0,10000), xlim = c(0,50000) ))
   dev.off()
 }

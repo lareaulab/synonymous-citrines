@@ -5,7 +5,7 @@ library(dplyr)
 library(plyr)
 library(tidyr)
 
-setwd(".../data/stemloop/")
+setwd("../../data/stemloop/")
 
 #qPCR (mRNA) data:
 mRNA = read.csv("SL_mRNA/J.WT.mRNA.csv", header = T)
@@ -51,7 +51,7 @@ j.avg = aggregate( TE ~ Cit + Strain + elongation_time, translation[translation$
 
 
 #basic (main figure) plot:
-pdf("SLvsWT.TEaverages.pdf", width = 2, height = 1.67, pointsize = 7, useDingbats = F, bg = "white" )
+pdf("../../figures/SLvsWT.TEaverages.pdf", width = 2, height = 1.67, pointsize = 7, useDingbats = F, bg = "white" )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(7,6.5,4,3) )
 par( oma = c(0,0.5,1,0) )
@@ -98,7 +98,7 @@ normed.wt.avg = aggregate( normedTE ~ Cit + Strain + elongation_time, normedTran
 normed.j.avg = aggregate( normedTE ~ Cit + Strain + elongation_time, normedTranslation[normedTranslation$Strain == "HC1J",], mean)
 
 #plotting normalized TE:
-pdf("SLvsWT.TEnormedtocitMax.pdf", width = 2, height = 1.67, pointsize = 7, useDingbats = F, bg = "white" )
+pdf("../../figures/SLvsWT.TEnormedtocitMax.pdf", width = 2, height = 1.67, pointsize = 7, useDingbats = F, bg = "white" )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(7,6.5,4,3) )
 par( oma = c(0,0.5,1,0) )
@@ -153,7 +153,7 @@ HP.WTratiosTE <- dividedTE$ratio
 trend <- lm(HP.WTratiosTE~rates)
 
 #plotting change in TE across citrines:
-pdf("SLvsWT_TE_ratios.pdf", width = 2, height = 1.67, pointsize = 7, useDingbats = F, bg = "white" )
+pdf("../../figures/SLvsWT_TE_ratios.pdf", width = 2, height = 1.67, pointsize = 7, useDingbats = F, bg = "white" )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(7,6.5,4,3) )
 par( oma = c(0,0.5,1,0) )
@@ -176,4 +176,3 @@ title( xlab = "predicted elongation time\n(arbitrary units)", line = 4.5 )
 
 dev.off()
 
-```
