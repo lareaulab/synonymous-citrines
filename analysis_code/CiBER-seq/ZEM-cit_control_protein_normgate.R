@@ -89,15 +89,11 @@ data <- flowimport(dir)
 data <- na.omit(data)
 
 
-data$ratio <- data$Citrine.A / data$mCherry.A
-
 #background correction
 background <- data %>%
   dplyr::filter(cit == 'nocit') %>%
   select(Citrine.A) %>%
   summarise(median = median(Citrine.A))
 data$Citrine.cor <- data$Citrine.A - background$median
-
-data$ratiocor <- data$Citrine.cor / data$mCherry.A
 
 write_csv(data, "ZEM-citrine_fusion_control/ZEM-cit_controls_normgated_data.csv", header = T)
