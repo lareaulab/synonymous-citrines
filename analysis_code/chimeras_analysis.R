@@ -10,7 +10,7 @@ library(flowViz)
 library(plyr)
 library(tidyverse)
 
-setwd(".../data/RQC_knockouts_and_chimeras/")
+setwd("../../data/RQC_knockouts_and_chimeras/")
 PrimaryDirectory <- getwd()
 
 plots_on <- FALSE
