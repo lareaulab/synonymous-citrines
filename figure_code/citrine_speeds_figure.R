@@ -2,7 +2,7 @@
 
 library("fields")
 
-setwd("~/Dropbox/Berkeley/CodonCRISPR/Citrine Codon Paper and Final Data/figures data and code/figure 1 - citrine fluor, mRNA, KOs/")
+setwd("../../data/codon_scores/")
 
 
 coeffs <- read.delim("weinberg_coef_200.txt", header = T) # from Amanda running Choros on weinberg data, June 2022
