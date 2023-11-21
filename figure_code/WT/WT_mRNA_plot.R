@@ -9,12 +9,12 @@ pdf("../../figures/tunney_citrine_mrna.pdf", width = 1.75, height = 1.3, pointsi
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(7,6.5,2,3) )
 par( oma = c(0,0.5,1,0) )
+par( xpd = NA )
 plot( ratios$citscore, ratios$ratio, 
       col = cols[ratios$strain],
-      #cex = 0.6,
       axes = F,
       xlim = c(150,400),
-      ylim = c(0,1.5),
+      ylim = c(0, 1.5),
       pch = 20,
       xlab = "",
       ylab = "citrine / mCherry\nrelative mRNA ratio"
