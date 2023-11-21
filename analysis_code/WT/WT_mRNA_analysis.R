@@ -3,21 +3,20 @@
 
 setwd("../data/WT/WT_mRNA/")
 
-citrine_construct_scores_fname <- "../../citrine_scores_full_model.tsv"
-
+citrine_construct_scores_fname <- "../../codon_scores/citrine_scores_full_model.tsv"
 cit <- read.delim(citrine_construct_scores_fname, header=F, row.names = 1)
 names(cit) = c("time")
 namemap <- c( Y00 = "cit0", Y333 = "cit3", Y66 = "cit6", Y99 = "cit9", MAX = "citmax", MIN = "citmin")
 
 
-qpcr1 <- read.csv("Tunney McGlincy qPCR data/codopt_Ingolia Lab_2017-09-13 10-16-37_CT009900_sample-info.csv", header = T)
-qpcr1.cq <- read.csv("Tunney McGlincy qPCR data/codopt_Ingolia Lab_2017-09-13 10-16-37_CT009900 -  Quantification Summary_0.csv", header = T)
+qpcr1 <- read.csv("codopt_Ingolia Lab_2017-09-13 10-16-37_CT009900_sample-info.csv", header = T)
+qpcr1.cq <- read.csv("codopt_Ingolia Lab_2017-09-13 10-16-37_CT009900 -  Quantification Summary_0.csv", header = T)
 
-qpcr2 <- read.csv("Tunney McGlincy qPCR data/codopt_MIN069_Ingolia Lab_2017-10-24 14-15-53_CT009900_sample-info.csv", header = T)
-qpcr2.cq <- read.csv("Tunney McGlincy qPCR data/codopt_MIN069_Ingolia Lab_2017-10-24 14-15-53_CT009900 -  Quantification Summary_0.csv", header = T)
+qpcr2 <- read.csv("codopt_MIN069_Ingolia Lab_2017-10-24 14-15-53_CT009900_sample-info.csv", header = T)
+qpcr2.cq <- read.csv("codopt_MIN069_Ingolia Lab_2017-10-24 14-15-53_CT009900 -  Quantification Summary_0.csv", header = T)
 
-qpcr3 <- read.csv("Tunney McGlincy qPCR data/codopt_MIN6_redux_Ingolia Lab_2017-11-01 11-34-53_CT009900_sample-info.csv", header = T)
-qpcr3.cq <- read.csv("Tunney McGlincy qPCR data/codopt_MIN6_redux_Ingolia Lab_2017-11-01 11-34-53_CT009900 -  Quantification Summary_0.csv", header = T)
+qpcr3 <- read.csv("codopt_MIN6_redux_Ingolia Lab_2017-11-01 11-34-53_CT009900_sample-info.csv", header = T)
+qpcr3.cq <- read.csv("codopt_MIN6_redux_Ingolia Lab_2017-11-01 11-34-53_CT009900 -  Quantification Summary_0.csv", header = T)
 
 # strains min, 333, and max 
 qpcr1 <- qpcr1[ with( qpcr1, order( row, column )),]

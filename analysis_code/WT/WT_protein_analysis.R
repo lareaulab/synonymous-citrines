@@ -9,7 +9,11 @@ library(tidyverse)
 setwd("../../data/WT/WT_protein/")
 
 sample_info <- "sample-info.csv"
+
 citrine_construct_scores_fname <- "../../codon_scores/citrine_scores_full_model.tsv"
+cit <- read.delim(citrine_construct_scores_fname, header=F, row.names = 1)
+names(cit) = c("time")
+
 
 var.names <- c("FSC.A", "SSC.A", "Citrine.A", "mCherry.A", "time") # FITC, PE-Texas Red
 plots_on = T
@@ -64,10 +68,6 @@ row.names(flow_map) <- flow_map$Well
 
 gated_data <- cbind( gated_data,  flow_map[ gated_data$.id, ])
 
-#cit <- read.delim(citrine_construct_scores_fname, header=T, row.names = 1, comment.char = "#")
-cit <- read.delim(citrine_construct_scores_fname, header=F, row.names = 1)
-names(cit) = c("time")
-
 background <- gated_data %>%
    dplyr::filter(Strain == 'NIY110') %>%
    select(Citrine.A) %>%
@@ -90,11 +90,15 @@ ratios <- aggregate( ratio ~ Isolate + Strain, gated_data, median)
 # rep 3 of cit999 was later discarded after testing genomic copy number 
 ratios$ratio[ with( ratios, Isolate == 3 & Strain == "999" ) ] <- NA
 
-means <- aggregate( ratio ~ Strain, ratios, mean)
+#means <- aggregate( ratio ~ Strain, ratios, mean)
+
+# remove control strain
+ratios <- ratios[ ratios$Strain != "NIY110", ]
 
 # remap names 
-#rename <- c( "000" = "Y000", "333" = "Y333", "666" = "Y666", "999" = "Y999", "MAX" = "MAX", "MIN" = "MIN")
 rename <- c( "000" = "cit0", "333" = "cit3", "666" = "cit6", "999" = "cit9", "MAX" = "citmax", "MIN" = "citmin")
 ratios$Strain <- rename[ratios$Strain]
+ratios <- within( ratios, citscore <- cit[Strain,] )
+
 
 write.csv(ratios, "WT_protein_ratios.csv", row.names=FALSE)
