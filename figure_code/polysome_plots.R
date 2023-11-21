@@ -44,7 +44,7 @@ midpointsC <- sapply( 1:5, function(i)( (divC[i] + divC[i+1])/2 ) )
 yticks = seq(0, 0.6, by = 0.2)
 cols = c( slow = "darkorange2", fast = "magenta3")
 
-pdf("../../figures/polysome_rep_B.pdf", width = 2.5, height = 1.67, pointsize = 7, useDingbats = F, bg = "white" )
+pdf("../../figures/polysome_rep_2.pdf", width = 2.5, height = 1.67, pointsize = 7, useDingbats = F, bg = "white" )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(7,1,2,6) )
 par( oma = c(0,0.5,1,0.5) )
@@ -52,7 +52,7 @@ par( xpd = F )
 plot( traceB$time, traceB$potential, 
       type = "l",
       ylim = c(0, 1),
-      xlim = c(0.5,5.5),
+      xlim = c(0.5, 5.25),
       axes = F,
       lwd = 2,
       col = "lightgrey",
@@ -65,10 +65,10 @@ lines( midpointsB, 1.5 * repB$fast, lwd = 2, col = cols["fast"])# "magenta3" )
 axis( 4, at = 1.5 * yticks, labels = yticks, lwd = 0, lwd.ticks = 1, las = 1)
 text( midpointsB[1], 1.5*sum(repB[ 1,])/2 + c(0.06, -0.06), labels = c("slow citrine", "fast citrine"), col = cols[ c("slow", "fast") ], pos = 2)
 mtext("mRNA as fraction of total", side = 4, line = 3.5)
-mtext("replicate 1", 3, adj = 0)
+mtext("replicate 2", 3, adj = 0)
 dev.off()
 
-pdf("../../figures/polysome_rep_C.pdf", width = 2.5, height = 1.67, pointsize = 7, useDingbats = F, bg = "white" )
+pdf("../../figures/polysome_rep_1.pdf", width = 2.5, height = 1.67, pointsize = 7, useDingbats = F, bg = "white" )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(7,1,2,6) )
 par( oma = c(0,0.5,1,0.5) )
@@ -76,7 +76,7 @@ par( xpd = F )
 plot( traceC$time, traceC$potential, 
       type = "l",
       ylim = c(0, 1),
-      xlim = c(1,6),
+      xlim = c(1, 6),
       axes = F,
       lwd = 2,
       col = "lightgrey",
@@ -89,5 +89,5 @@ lines( midpointsC, 1.5 * repC$fast, lwd = 2, col = "magenta3" )
 axis( 4, at = 1.5 * yticks, labels = yticks, lwd = 0, lwd.ticks = 1, las = 1)
 text( midpointsC[1], 1.5*sum(repC[ 1,])/2 + c(0.06, -0.06), labels = c("slow citrine", "fast citrine"), col = cols[ c("slow", "fast") ], pos = 2)
 mtext("mRNA as fraction of total", side = 4, line = 3.5)
-mtext("replicate 2", 3, adj = 0)
+mtext("replicate 1", 3, adj = 0)
 dev.off()
