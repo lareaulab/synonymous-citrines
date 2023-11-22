@@ -5,16 +5,17 @@ library(flowViz)
 library(plyr)
 library(tidyverse)
 
-setwd("../../data/WT/WT_protein/")
+datadir <- "data/WT/WT_protein/" 
+figdir <- "figures/"
 
-WT_protein_ratios <- read.csv("WT_protein_ratios.csv")
+WT_protein_ratios <- read.csv(paste0( datadir, "WT_protein_ratios.csv" ))
 ratios <- as.data.frame(WT_protein_ratios)
 
 speeds <- ratios$citscore
 cols <- c( citmin = "magenta3", cit0 = "royalblue2", cit3 = "green3", cit6 = "gold1", cit9 = "darkorange2", citmax = "red2")
 
 # protein output
-pdf("../../../figures/tunney_citrine_fluor.pdf", width = 1.75, height = 1.3, pointsize = 6.5, useDingbats = F, bg = "white" )
+pdf( paste0( figdir, "tunney_citrine_fluor.pdf" ), width = 1.75, height = 1.3, pointsize = 6.5, useDingbats = F, bg = "white" )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(7,6.5,2,3) )
 par( oma = c(0,0.5,1,0) )

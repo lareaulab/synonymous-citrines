@@ -11,8 +11,8 @@ library(flowViz)
 library(plyr)
 library(tidyverse)
 
-setwd("/Users/loudevanneaux/Desktop/Citrine Codons Paper/Github3/Citrine-Codons-Data/data/5p_standardized/")
-flow_map_file = "//Users/loudevanneaux/Desktop/Citrine Codons Paper/Github3/Citrine-Codons-Data/data/5p_standardized/flow_map.csv"
+setwd("data/5p_standardized/")
+flow_map_file = "flow_map.csv"
 
 PrimaryDirectory <- getwd()
 plots_on <- FALSE
@@ -63,8 +63,6 @@ flow_map <- read.csv( flow_map_file, header = T, row.names = 1)
 colnames(flow_map) <- sprintf("%02d", 1:12) 
 wells <- apply( expand.grid(row.names(flow_map), colnames(flow_map)), 1, function(x){ paste0(x[1], x[2]) })
 flow_map <- data.frame( sample = c(as.matrix(flow_map)), row.names = wells )
-#flow_map <- data.frame( .id = wells, sample = c(as.matrix(flow_map)))
-#flow_map <- flow_map[flow_map$sample != "",]
 
 split_line <- function( line ) {
   if ( is.na(line) | line == "" ) { NA }
@@ -97,7 +95,5 @@ gated_data$mCherry.cor <- gated_data$mCherry.H - mchbackground$median
 # ratio of citrine to mCherry for each data point
 gated_data$ratio <- with( gated_data, Citrine.cor / mCherry.cor)
 gated_data$ratio.H <- with( gated_data, Citrine.H / mCherry.H)
-#gated_data$ratio.A <- with( gated_data, Citrine.A / mCherry.A)
-#gated_data$FSCratio.A <- with( gated_data, Citrine.A / FSC.A)
 
-write_csv(gated_data, "5standardized_normgated_data_bg_uncorrected.csv")
+write_csv(gated_data, "5standardized_normgated_data_bg_corrected.csv")

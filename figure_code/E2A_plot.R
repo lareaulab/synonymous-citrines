@@ -1,8 +1,6 @@
 library(tidyverse)
 library(dplyr)
 
-setwd("..")
-
 datadir <- "data/E2A/"
 figdir <- "figures/"
 
@@ -60,7 +58,7 @@ ind.labels <- c( "cit/iRFP", "mCh/iRFP")
 
 scaled.matrix <- as.matrix( medians.avg.scaled[, 2:4])
 
-pdf( paste0( figdir, "figures/e2a_scaled.pdf"), width = 2, height = 1.3, pointsize = 6.5, useDingbats = F, bg = "white" )
+pdf( paste0( figdir, "e2a.pdf"), width = 2, height = 1.3, pointsize = 6.5, useDingbats = F, bg = "white" )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(4,6.5,4,5) )
 par( oma = c(0,0.5,1,0) )
