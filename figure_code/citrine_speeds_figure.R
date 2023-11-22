@@ -2,10 +2,10 @@
 
 library("fields")
 
-setwd("../../data/codon_scores/")
+datadir <- "data/codon_scores/"
+figdir <- "figures/"
 
-
-coeffs <- read.delim("weinberg_coef_200.txt", header = T) # from Amanda running Choros on weinberg data, June 2022
+coeffs <- read.delim( paste0( datadir, "weinberg_coef_200.txt" ), header = T) # from Amanda running Choros on weinberg data, June 2022
 
 # sequences of individual citrine constructs
 citMin_seq <- "ATGTCCAAAGGCGAAGAACTCTTTACCGGCGTCGTCCCCATTCTCGTCGAACTCGATGGCGATGTCAATGGCCACAAATTTTCCGTCTCCGGCGAAGGCGAAGGCGATGCCACCTATGGCAAACTCACCCTCAAATTTATTTGTACCACCGGCAAACTCCCCGTCCCCTGGCCCACCCTCGTCACCACCCTCGGCTATGGCCTCATGTGTTTTGCCCGTTATCCCGATCACATGAAACAACACGATTTTTTTAAATCCGCCATGCCCGAAGGCTATGTCCAAGAACGTACCATTTTTTTTAAAGATGATGGCAATTATAAAACCCGTGCCGAAGTCAAATTTGAAGGCGATACCCTCGTCAATCGTATTGAACTCAAAGGCATTGATTTTAAAGAAGATGGCAATATTCTCGGCCACAAACTCGAATATAATTATAATTCCCACAATGTCTATATTATGGCCGATAAACAAAAAAATGGCATTAAAGTCAATTTTAAAATTCGTCACAATATTGAAGATGGCTCCGTCCAACTCGCCGATCACTATCAACAAAATACCCCCATTGGCGATGGCCCCGTCCTCCTCCCCGATAATCACTATCTCTCCTATCAATCCGCCCTCTCCAAAGATCCCAATGAAAAACGTGATCACATGGTCCTCCTCGAATTTGTCACCGCCGCCGGCATTACCCACGGCATGGATGAACTCTATAAATGA"
@@ -48,7 +48,7 @@ cols <- colorRampPalette(c("white", "blue"))(128)[1:64] # just use the lighter b
 citrinecols <- c( citmin = "magenta3", cit0 = "royalblue2", cit3 = "green3", cit6 = "gold1", cit9 = "darkorange2", citmax = "red2")
 
 
-pdf("citrines2.pdf", width = 3.5, height = 1, pointsize = 6.5, useDingbats = F, bg = "white" )
+pdf( paste0( figdir, "citrines.pdf"), width = 3.5, height = 1, pointsize = 6.5, useDingbats = F, bg = "white" )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(7,6,2,2) )
 par( oma = c(0,0.5,1,0) )

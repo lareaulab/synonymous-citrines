@@ -5,11 +5,12 @@
 library(plyr)
 library(tidyverse)
 
-setwd("../data/RQC_knockouts_and_chimeras/")
+datadir <- "data/RQC_knockouts_and_chimeras/"
+figdir <- "figures/"
 
 namemap <- c( ci = 'citmin', c9 = 'cit9', Sphinx = 'slowfast', Lion = 'fastslow')
 
-gated <- read.csv("chimeras_normgated_data_bg_corrected.csv", header=T)
+gated <- read.csv( paste0( datadir, "knockouts_chimeras_normgated_bg_corrected.csv" ), header=T)
 
 ratios <- aggregate( ratio ~ sample + clone + cit + strain, gated, median)
 
@@ -18,7 +19,7 @@ ratios$cit <- namemap[ ratios$cit ]
 
 averages <- aggregate( ratio ~ cit, ratios, mean) # average of the three points
 
-citrine_construct_scores_fname <- "../codon_scores/citrine_scores_full_model.tsv"
+citrine_construct_scores_fname <- "data/codon_scores/citrine_scores_full_model.tsv"
 cit <- read.delim(citrine_construct_scores_fname, header=F, row.names = 1)
 names(cit) = c("time")
 
@@ -32,15 +33,15 @@ cols <- c( citmin = 'magenta3', cit9 = 'darkorange2', slowfast = 'darkgray', fas
 firsthalf <- c( citmin = 'magenta3', cit9 = 'darkorange2', slowfast = 'darkorange2', fastslow = 'magenta3' )
 secondhalf <- c( citmin = 'magenta3', cit9 = 'darkorange2', slowfast = 'magenta3', fastslow = 'darkorange2' )
 
-pdf("../../figures/chimeras_flow.newspeeds.pdf", width = 2.5, height = 1.67, pointsize = 7, useDingbats = F, bg="white" )
+
+pdf( paste0( figdir, "chimeras.pdf"), width = 2.01, height = 1.3, pointsize = 6.5, useDingbats = F, bg = "white" )
 par( mex = 0.65 ) # sets margin stuff
-par( mar = c(7,6.5,4,10) )
+par( mar = c(7,6.5,2,7) ) # added 4 lines to right margin, each line is 0.065 inches
 par( oma = c(0,0.5,1,0) )
 par( xpd = NA )
-
 plot( xpoints, ratios$ratio, 
       ylim = c(0,0.3),
-      xlim = c(150,350),
+      xlim = c(150,400),
       pch = 3, 
       cex = 0.6, lwd = 1.5,
       col = cols[ ratios$cit ],
@@ -48,12 +49,11 @@ plot( xpoints, ratios$ratio,
       ylab = "citrine / mCherry\nfluorescence ratio",
       axes = F
       )
-axis( 1 )
-axis( 2, at = c(0.0, 0.1, 0.2, 0.3) )
+#axis( 1, lwd = 0.75, at = seq(150, 400, by = 50), labels = c(NA, "200", NA, "300", NA, "400") )
+axis( 1, lwd = 0.75, at = seq(150, 350, by = 50), labels = c(NA, "200", NA, "300", NA) )
+axis( 2, lwd = 0.75, at = c(0,0.1,0.2,0.3) )
 title( xlab = "predicted elongation time\n(arbitrary units)", line = 4.5 )
-
 rect( xleft = 370, ybottom = averages$ratio - 0.005, xright = 380, ytop = averages$ratio + 0.005, col = firsthalf[averages$cit], border = NA )
 rect( xleft = 380, ybottom = averages$ratio - 0.005, xright = 390, ytop = averages$ratio + 0.005, col = secondhalf[averages$cit], border = NA )
 text( x = 400, y = averages$ratio + 0.005, labels = paste(desc[averages$cit]), adj = 0, col = cols[averages$cit] )
-
 dev.off()

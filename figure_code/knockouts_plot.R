@@ -4,16 +4,16 @@
 library(plyr)
 library(tidyverse)
 
-setwd("..")
 datadir <- "data/RQC_knockouts_and_chimeras/"
 figdir <- "figures/"
 
-gated <- read.csv(paste0( datadir, "RQCknockouts_normgated_data_bg_corrected.csv"), header = T)
+gated <- read.csv(paste0( datadir, "knockouts_chimeras_normgated_bg_corrected.csv"), header = T)
 
 ratios <- aggregate( ratio ~ sample + clone + cit + strain, gated, median)
 
 # isolates that turned out to be heterozygous for the knockout
 hets <- c("Gcn1-C-ci", "Gcn1-C-c9", "Hel2Syh1-B-ci", "Hel2Syh1-B-c9" )
+# chimera strains - will analyze in another figure
 exclude <- c('4743', 'Lion', 'Sphinx')
 
 ratios <- ratios[ !(ratios$strain %in% exclude ), ]
@@ -34,8 +34,7 @@ labels <- c(expression(paste(italic('gcn1'), Delta)),
             expression(paste(italic('syh1'), Delta)),
             "WT")
 
-#pdf("knockout_flow.pdf", width = 4, height = 1.67, pointsize = 7, useDingbats = F, bg = "white" )
-pdf( paste0(figdir, "knockout_flow.pdf"), width = 3.5, height = 1.4, pointsize = 6.5, useDingbats = F, bg = "white" )
+pdf( paste0(figdir, "rqc_knockouts.pdf"), width = 3.5, height = 1.4, pointsize = 6.5, useDingbats = F, bg = "white" )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(9,6.5,2,10) )
 par( oma = c(0,0.5,1,0) )

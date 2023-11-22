@@ -11,23 +11,22 @@ library(flowViz)
 library(plyr)
 library(tidyverse)
 
-setwd("../data/RQC_knockouts_and_chimeras/")
-PrimaryDirectory <- getwd()
+datadir <- "data/RQC_knockouts_and_chimeras/"
 
 plots_on <- FALSE
 
-flow_map_file = "flow_map.csv"
+flow_map_file = paste0( datadir, "flow_map.csv" )
 
 #Import and gate flow data - run on all .fcs files in the working directory folder 
 #Set variable names for flow data files - must correspond to .fcs file parameters
 var.names <- c("FSC.A","FSC.H", "SSC.A", "SSC.H", "Citrine.A", "Citrine.H", "mCherry.A", "mCherry.H", "time")
 
 #load the fcs files into a set
-flowData <- read.flowSet( files = list.files(path = PrimaryDirectory, pattern = "*.fcs"), transformation = F )
+flowData <- read.flowSet( files = list.files(path = datadir, pattern = "*.fcs", full.names = T), transformation = F )
 #list with 57 flowFrames, each from a different .fcs experiment file
 
 flowCore::colnames(flowData) <- var.names
-sampleNames(flowData) <- sapply( list.files( path = PrimaryDirectory, pattern = ".fcs" ),
+sampleNames(flowData) <- sapply( list.files( path = datadir, pattern = ".fcs", full.names = T ),
                                  function(x){ substr( x, nchar(x) - 6, nchar(x) - 4 ) })
 
 # gating: fits 2d normal distribution, selects all events within the Mahalanobis distance
@@ -38,18 +37,18 @@ flowDataGated <- flowCore::Subset( flowData, normresults )
 # diagnostic plots of flow data
 if(plots_on == TRUE) {
   #plot data with gates
-  png( "fsc-ssc-normgates.png", width = 20, height = 20, units = "in", res = 300 )
+  png( paste0(datadir,"fsc-ssc-normgates.png"), width = 20, height = 20, units = "in", res = 300 )
   print( xyplot( `SSC.A` ~ `FSC.A`, data = flowData, smooth = FALSE, filter = normresults, ylim = c(0,20000), xlim = c(0,100000) ))
   dev.off()
   # plot gated data only
-  png( "fsc-ssc-normgated-only.png", width = 20, height = 20, units = "in", res = 300 )
+  png( paste0(datadir,"fsc-ssc-normgated-only.png"), width = 20, height = 20, units = "in", res = 300 )
   print( xyplot( `SSC.A` ~ `FSC.A`, data = flowDataGated, smooth = FALSE, ylim = c(0,20000), xlim = c(0,100000) ))
   dev.off()
   # plot gated fluorescence data only
-  png("fluor-normgated-only.png", width = 20, height = 20, units = "in", res = 300 )
+  png( paste0(datadir,"fluor-normgated-only.png"), width = 20, height = 20, units = "in", res = 300 )
   print( xyplot( `Citrine.H` ~ `mCherry.H`, data = flowDataGated, smooth = FALSE, ylim = c(0,2000), xlim = c(0,10000) ))
   dev.off()
-  png("fluor-all.png", width = 20, height = 20, units = "in", res = 300 )
+  png( paste0(datadir,"fluor-all.png"), width = 20, height = 20, units = "in", res = 300 )
   print( xyplot( `Citrine.H` ~ `mCherry.H`, data = flowData, smooth = FALSE, ylim = c(0,2000), xlim = c(0,10000) ))
   dev.off()
 }
@@ -65,8 +64,6 @@ flow_map <- read.csv( flow_map_file, header = T, row.names = 1)
 colnames(flow_map) <- sprintf("%02d", 1:12) 
 wells <- apply( expand.grid(row.names(flow_map), colnames(flow_map)), 1, function(x){ paste0(x[1], x[2]) })
 flow_map <- data.frame( sample = c(as.matrix(flow_map)), row.names = wells )
-#flow_map <- data.frame( .id = wells, sample = c(as.matrix(flow_map)))
-#flow_map <- flow_map[flow_map$sample != "",]
 
 split_line <- function( line ) {
   if ( is.na(line) | line == "" ) { NA }
@@ -99,5 +96,5 @@ gated_data$mCherry.cor <- gated_data$mCherry.H - mchbackground$median
 # ratio of citrine to mCherry for each data point
 gated_data$ratio <- with( gated_data, Citrine.cor / mCherry.cor)
 
-write_csv(gated_data, "RQCknockouts_normgated_data_bg_corrected.csv")
+write_csv( gated_data, paste0( datadir, "knockouts_chimeras_normgated_bg_corrected.csv") )
 
