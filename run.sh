@@ -44,6 +44,13 @@ R CMD BATCH figure_code/chimera_plot.R
 ######
 # figure 5: CRISPRi
 ######
+R CMD BATCH analysis_code/individual_CRISPRi/crispri_growthdefectscontrols_protein_normgate.R
+R CMD BATCH analysis_code/individual_CRISPRi/crispri_protein_normgate.R
+R CMD BATCH analysis_code/individual_CRISPRi/crispri_te_with_errorprop.R
+
+R CMD BATCH figure_code/individual_CRISPRi/crispri_growthdefectcontrols_plot.R
+R CMD BATCH figure_code/individual_CRISPRi/crispri_protein_plot.R
+R CMD BATCH figure_code/individual_CRISPRi/crispri_te_plot.R
 
 ######
 # figure 6: stem loops
