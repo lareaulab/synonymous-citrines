@@ -1,17 +1,16 @@
- TE calculations for the individual crispr experiments
+# TE calculations for the individual crispr experiments
 
 library(plyr)
 library(tidyverse)
 
-setwd("../../data/individual_CRISPRi/")
-
+datadir <- "data/individual_CRISPRi/"
 
 ord <- c(FUN12 = 3, RPG1 = 2, HO = 1)
 se <- function(x) sd(x)/sqrt(length(x))
 
 ## citrine fluorescence
 
-data <- read.csv("CRISPRi_protein/crispri_normgated_data_bg_corrected.csv", header=T)
+data <- read.csv( file.path( datadir, "CRISPRi_protein/crispri_normgated_data_bg_corrected.csv"), header=T)
 data <- data[ with( data, (strain %in% c(102, 105, 111) & media == "tet") ), ] # crispri targets of interest: HO control, RPG1, FUN12
 
 fluor_ratios <- aggregate( ratio ~ clone + cit + gene, data, median ) # median of the green/red ratio of all points per sample
@@ -30,17 +29,17 @@ fluor_c9_v_ci$se <- fluor_c9_v_ci$fc * sqrt( (with(cit9s, se/ratio)^2 + with(cit
 
 ## mRNA
 
-fun12 <- read.csv("CRISPRi_mRNA/HOandFUN12_20230622/SCD_CRISPRi(HOandFUN12)_20230622 -  Quantification Summary_0.csv", header = T, row.names = 2)
-rpg1 <- read.csv("CRISPRi_mRNA/HOandRPG1_20230622/SCD_CRISPRi_20230622 -  Quantification Summary_0.csv", header = T, row.names = 2)
+fun12 <- read.csv( file.path( datadir, "CRISPRi_mRNA/HOandFUN12_20230622/SCD_CRISPRi(HOandFUN12)_20230622 -  Quantification Summary_0.csv" ), header = T, row.names = 2)
+rpg1 <- read.csv( file.path( datadir, "CRISPRi_mRNA/HOandRPG1_20230622/SCD_CRISPRi_20230622 -  Quantification Summary_0.csv" ), header = T, row.names = 2)
 
-fun12map <- read.csv("CRISPRi_mRNA/qPCR_map_20230622/HOandFUN12-Table 1.csv", header=T, row.names=1)
+fun12map <- read.csv( file.path( datadir, "CRISPRi_mRNA/qPCR_map_20230622/HOandFUN12-Table 1.csv" ), header=T, row.names=1)
 fun12labels <- c(t( fun12map[1:7,] ))[1:81]
 fun12labels <- str_split(fun12labels, "-", simplify=T)
 colnames(fun12labels) <- c("expt", "cit", "biorep", "techrep")
 
 fun12 <- cbind(fun12, fun12labels)
 
-rpg1map <- read.csv("CRISPRi_mRNA/qPCR_map_20230622/HOandRPG1-Table 1.csv", header=T, row.names=1)
+rpg1map <- read.csv( file.path( datadir, "CRISPRi_mRNA/qPCR_map_20230622/HOandRPG1-Table 1.csv" ), header=T, row.names=1)
 rpg1labels <- c(t( rpg1map[1:7,] ))[1:81]
 rpg1labels <- str_split(rpg1labels, "-", simplify=T)
 colnames(rpg1labels) <- c("expt", "cit", "biorep", "techrep")
@@ -78,5 +77,5 @@ mrna_c9_v_ci <- mrna_c9_v_ci[ order( ord[mrna_c9_v_ci$gene]), ]
 plot_fc <- data.frame( mRNA = mrna_c9_v_ci$fc, protein = fluor_c9_v_ci$fc, row.names = fluor_c9_v_ci$gene)
 plot_se <- data.frame( mRNA = mrna_c9_v_ci$se, protein = fluor_c9_v_ci$se, row.names = fluor_c9_v_ci$gene)
 
-write.csv(plot_fc, "ratios_for_CRISPRi_te.csv")
-write_csv(plot_se, "standard_error_for_CRISPRi_te.csv")
+write.csv(plot_fc, file.path( datadir, "ratios_for_CRISPRi_te.csv" )) 
+write.csv(plot_se, file.path( datadir, "standard_error_for_CRISPRi_te.csv" ))

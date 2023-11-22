@@ -3,10 +3,11 @@
 library(plyr)
 library(tidyverse)
 
-setwd("../../data/individual_CRISPRi/CRISPRi_protein/")
-data <- read.csv("crispri_normgated_data_bg_corrected.csv", header=T)
+datadir <- "data/individual_CRISPRi/CRISPRi_protein/"
+figdir <- "figures"
 
-data.scd <- data[ with( data, (strain %in% c(100:105, 111) & media == "SCD") ), ] # uninduced - don't analyze these
+data <- read.csv( file.path( datadir, "crispri_normgated_data_bg_corrected.csv"), header=T)
+
 data <- data[ with( data, (strain %in% c(100:105, 111) & media == "tet") ), ] # crispri targets of interest from the CiBER-seq experiment
 
 ratios <- aggregate( ratio ~ clone + cit + alias + gene, data, median ) # median of the green/red ratio of all points per sample
@@ -28,7 +29,7 @@ row.names(c9ci_ratios) <- c9ci_ratios$gene
 ord <- c( "HO", c9ci_ratios$gene[ order(c9ci_ratios$c9ci, decreasing = T) ][1:6] )
 c9ci_ratios <- c9ci_ratios[ ord, ]
 
-pdf("../../../figures/crispri_flow.pdf", width = 2.5, height = 1.67, pointsize = 7, useDingbats = F, bg = "white" )
+pdf( file.path( figdir, "crispri_flow.pdf"), width = 2, height = 1.3, pointsize = 6.5, useDingbats = F, bg = "white" )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(8,6.5,3,3) )
 par( oma = c(0,0.5,1,0) )
@@ -37,37 +38,16 @@ mp <- barplot( c9ci_ratios$c9ci,
                ylim = c(0,0.5),
                space = 0.6,
                axes = F,
-               ylab = "slow citrine / fast citrine",
+               ylab = "slow citrine as\nfraction of fast citrine",
                xlab = NA,
                border = NA,
-               col = "#ACAAFF"
+               col = "darkgrey"
                )
-abline( h = c9ci_ratios["HO","c9ci"], lty = "dotted", col = "darkgrey")
-axis(1, labels = c9ci_ratios$gene, at = mp, font = 3, tick = F, las = 2)
-axis(2)
+abline( h = c9ci_ratios["HO","c9ci"], lty = "dotted", col = "grey30")
+axis(1, labels = c9ci_ratios$gene, at = mp, font = 3, tick = F, las = 2, lwd = 0.75 )
+axis(2, lwd = 0.75 )
 title( xlab = "CRISPRi target", line = 6 )
 arrows( mp, with( c9ci_ratios, c9ci - se ), mp, with( c9ci_ratios, c9ci + se ), angle=90, code=3, length = 0.02)
 dev.off()
 
 
-pdf("../../../figures/crispri_flow_aliases.pdf", width = 2.5, height = 1.67, pointsize = 7, useDingbats = F, bg = "white" )
-par( mex = 0.65 ) # sets margin stuff
-par( mar = c(8,5,3,1) )
-par( oma = c(0,0.5,1,0) )
-par( xpd = F )
-mp <- barplot( c9ci_ratios$c9ci,
-               ylim = c(0,0.5),
-               space = 0.6,
-               axes = F,
-               ylab = "slow citrine / fast citrine",
-               xlab = NA,
-               border = NA,
-               col = "#ACAAFF"
-)
-abline( h = c9ci_ratios["HO","c9ci"], lty = "dotted", col = "darkgrey")
-axis(1, labels = c9ci_ratios$gene, at = mp, font = 3, tick = F, cex.axis = 1)
-axis(1, labels = c9ci_ratios$alias, at = mp, tick = F, cex.axis = 0.8, line = 2)
-axis(2)
-title( xlab = "CRISPRi target", line = 6 )
-arrows( mp, with( c9ci_ratios, c9ci - se ), mp, with( c9ci_ratios, c9ci + se ), angle=90, code=3, length = 0.02)
-dev.off()

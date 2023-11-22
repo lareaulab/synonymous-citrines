@@ -14,10 +14,9 @@ library(tidyverse)
 
 plots_on <- F
 
-setwd("../../data/individual_CRISPRi/growth_defect_controls/")
-dir <- "../../data/individual_CRISPRi/growth_defect_controls/"
+datadir <- "data/individual_CRISPRi/growth_defect_controls/"
 
-guide_key <- read.csv('guide_key.csv', row.names = 1, header = F, col.names = c("strain","gene","alias"))
+guide_key <- read.csv( paste0(datadir, 'guide_key.csv'), row.names = 1, header = F, col.names = c("strain","gene","alias"))
 
 # Set variable names for flow data files - must correspond to .fcs file parameters
 var.names <- c("FSC.A","FSC.H", "FSC.W", "SSC.A", "SSC.H", "SSC.W", "Citrine.A", "Citrine.H", "Citrine.W", "mCherry.A", "mCherry.H", "mCherry.W", "time")
@@ -25,10 +24,8 @@ var.names <- c("FSC.A","FSC.H", "FSC.W", "SSC.A", "SSC.H", "SSC.W", "Citrine.A",
 # Import and gate flow data - run on all .fcs files in directory
 flowimport <- function( directory ){
 
-  setwd(directory)
   # load the fcs files into a set (a list with many flowFrames, each from a different .fcs experiment file)
-  flowData <- read.flowSet( files = list.files( pattern = "*.fcs"), transformation = F )
-
+  flowData <- read.flowSet( files = list.files(path = directory, pattern = "*.fcs", full.names = T), transformation = F )
   flowCore::colnames(flowData) <- var.names
   
   sampleNames(flowData) <- sapply( sampleNames(flowData),
@@ -44,19 +41,19 @@ flowimport <- function( directory ){
   # diagnostic plots of flow data
   if(plots_on == TRUE) {
     # plot all FSC vs SSC data and superimpose gate boundary
-    png( "fsc-ssc-normgates.png", width = 20, height = 20, units = "in", res = 300 )
+    png( paste0(directory, "fsc-ssc-normgates.png"), width = 20, height = 20, units = "in", res = 300 )
     print( xyplot( `SSC.A` ~ `FSC.A`, data = flowData, smooth = FALSE, filter = normresults, ylim = c(0,20000), xlim = c(0,100000) ))
     dev.off()
     # plot gated FSC vs SSC data only
-    png( "fsc-ssc-normgated-only.png", width = 20, height = 20, units = "in", res = 300 )
+    png( paste0(directory, "fsc-ssc-normgated-only.png"), width = 20, height = 20, units = "in", res = 300 )
     print( xyplot( `SSC.A` ~ `FSC.A`, data = flowDataGated, smooth = FALSE, ylim = c(0,20000), xlim = c(0,100000) ))
     dev.off()
     # plot gated fluorescence data only
-    png( "fluor-normgated-only.png", width = 20, height = 20, units = "in", res = 300 )
+    png( paste0(directory, "fluor-normgated-only.png"), width = 20, height = 20, units = "in", res = 300 )
     print( xyplot( `Citrine.H` ~ `mCherry.H`, data = flowDataGated, smooth = FALSE, ylim = c(0,2000), xlim = c(0,10000) ))
     dev.off()
     # plot all fluorescence data
-    png("fluor-ungated.png", width = 20, height = 20, units = "in", res = 300 )
+    png( paste0(directory, "fluor-ungated.png"), width = 20, height = 20, units = "in", res = 300 )
     print( xyplot( `Citrine.H` ~ `mCherry.H`, data = flowData, smooth = FALSE, ylim = c(0,2000), xlim = c(0,10000) ))
     dev.off()
   }
@@ -67,7 +64,7 @@ flowimport <- function( directory ){
   gated_data <- ldply( gated_data )
   
   # map well to sample
-  flow_map <- read.csv( "flow_map.csv", header = T, row.names = 1)
+  flow_map <- read.csv( paste0( directory, "flow_map.csv" ), header = T, row.names = 1)
   colnames(flow_map) <- sprintf("%02d", 1:ncol(flow_map)) 
   wells <- apply( expand.grid(row.names(flow_map), colnames(flow_map)), 1, function(x){ paste0(x[1], x[2]) })
   
@@ -86,14 +83,13 @@ flowimport <- function( directory ){
   
   gated_data <- cbind( gated_data,  flow_map[ gated_data$.id, ])
 
-  setwd("..")
   return(gated_data)
 }
 
-data <- flowimport(dir)
+data <- flowimport(datadir)
 data <- na.omit(data)
 
 data$ratio <- data$Citrine.H / data$mCherry.H
 
-write_csv(data, "crispri_growth_defect_controls_normgated_data.csv")
+write_csv( data, paste0( datadir, "crispri_growth_defect_controls_normgated_data.csv") )
 
