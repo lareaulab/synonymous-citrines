@@ -27,7 +27,7 @@ plot( te$citscore, te$te,
       ylim = c(0, 0.3),
       pch = 20,
       xlab = "",
-      ylab = "citrine / mCherry\nrelative mRNA ratio"
+      ylab = "translation efficiency"
 )
 axis( 1, lwd = 0.75, at = seq(150, 400, by =50), labels = c(NA, "200", NA, "300", NA, "400") )
 axis( 2, lwd = 0.75, at = c(0,0.1,0.2,0.3) )

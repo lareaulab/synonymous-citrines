@@ -4,12 +4,12 @@ library(flowViz)
 library(plyr)
 library(tidyverse)
 
-setwd("../../data/stemloop/SL_protein/FCS_files/")
-PrimaryDirectory <- getwd()
+datadir <- "data/stemloop/SL_protein/"
+fcsdir <- file.path( datadir, "FCS_files" )
 
 plots_on <- FALSE
 
-flow_map_file = "../PlateMap.csv"
+flow_map_file = file.path( datadir, "PlateMap.csv" )
 
 #Import and gate flow data - run on all .fcs files in the working directory folder 
 #Set variable names for flow data files - must correspond to .fcs file parameters
@@ -17,7 +17,7 @@ var.names <- c("FSC.A", "FSC.H", "FSC.W", "SSC.A", "SSC.H", "SSC-W", "Citrine.A"
 # for next time: don't rely on this - find a way to grab the original variable names and change to "-"
 
 #load the fcs files into a set
-flowData <- read.flowSet( files = list.files(path = PrimaryDirectory, pattern = "*.fcs"), transformation = F )
+flowData <- read.flowSet( files = list.files(path = fcsdir, pattern = "*.fcs", full.names = T), transformation = F )
 #list of 55 flowFrames, each from a different .fcs experiment file
 
 flowCore::colnames(flowData) <- var.names
@@ -33,14 +33,14 @@ flowDataGated <- flowCore::Subset( flowData, normresults )
 # diagnostic plots of flow data
 if(plots_on == TRUE) {
   #plot data with gates
-  png( "fsc-ssc-normgates.png", width = 20, height = 20, units = "in", res = 300 )
+  png( file.path( fcsdir, "fsc-ssc-normgates.png" ), width = 20, height = 20, units = "in", res = 300 )
   print( xyplot( `SSC.A` ~ `FSC.A`, data = flowData, smooth = FALSE, filter = normresults))#, ylim = c(0,90000), xlim = c(0,30000) ))
   dev.off()
   # plot gated fluorescence data only
-  png("fluor-normgated-only.png", width = 20, height = 20, units = "in", res = 300 )
+  png( file.path( fcsdir, "fluor-normgated-only.png" ), width = 20, height = 20, units = "in", res = 300 )
   print( xyplot( `Citrine.A` ~ `mCherry.A`, data = flowDataGated, smooth = FALSE, ylim = c(0,2000), xlim = c(0,10000) ))
   dev.off()
-  png("fluor-all.png", width = 20, height = 20, units = "in", res = 300 )
+  png( file.path( fcsdir, "fluor-all.png" ), width = 20, height = 20, units = "in", res = 300 )
   print( xyplot( `Citrine.A` ~ `mCherry.A`, data = flowData, smooth = FALSE, ylim = c(0,10000), xlim = c(0,50000) ))
   dev.off()
 }
@@ -87,4 +87,4 @@ gated_data$mCherry.cor <- gated_data$mCherry.A - mchbackground$median
 # ratio of citrine to mCherry for each data point
 gated_data$ratio <- with( gated_data, Citrine.cor / mCherry.cor)
 
-write.csv(gated_data, "../normgated_data_bg_corrected.csv")
+write.csv( gated_data, file.path( datadir, "normgated_data_bg_corrected.csv" ))
