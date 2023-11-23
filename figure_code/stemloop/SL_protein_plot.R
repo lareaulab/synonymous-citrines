@@ -1,53 +1,57 @@
 library(tidyverse)
 library(dplyr)
 
-setwd("../../data/stemloop/SL_protein/")
+datadir <- "data/stemloop/SL_protein/"
+figdir <- "figures"
 
-gated = read.csv("normgated_data_bg_corrected.csv", header=T, row.names=1)
+gated = read.csv( file.path( datadir, "normgated_data_bg_corrected.csv" ), header=T, row.names=1)
+
+citrine_construct_scores_fname <- "data/codon_scores/citrine_scores_full_model.tsv"
+cit <- read.delim(citrine_construct_scores_fname, header=F, row.names = 1)
+names(cit) = c("time")
 
 medians <- aggregate( ratio ~ clone + cit + strain, gated, median)
-
 medians <- medians[ medians$strain != "BY4743", ]
 
-# Add elongation rate for each citrine
-rates <- c( citmin = 164.6625671,
-            cit0 = 234.2350459, 
-            cit3 = 262.7644388, 
-            cit6 = 269.5761919, 
-            cit9 = 302.6383892, 
-            citmax = 388.8861452 )
+medians$elongation_time <- cit[ tolower(medians$cit), 1 ] # look up elongation times by citrine name
 
-medians$elongation_rate = 400 / rates[medians$cit] 
-medians$elongation_time = rates[medians$cit] 
+wt.avg = aggregate( ratio ~ cit + strain + elongation_time, medians[medians$strain == "WT",], mean)
+j.avg = aggregate( ratio ~ cit + strain + elongation_time, medians[medians$strain == "HC1j",], mean)
+g.avg = aggregate( ratio ~ cit + strain + elongation_time, medians[medians$strain == "HC1g",], mean)
 
-wt.avg = aggregate( ratio ~ cit + strain + elongation_rate + elongation_time, medians[medians$strain == "WT",], mean)
-j.avg = aggregate( ratio ~ cit + strain + elongation_rate + elongation_time, medians[medians$strain == "HC1j",], mean)
-g.avg = aggregate( ratio ~ cit + strain + elongation_rate + elongation_time, medians[medians$strain == "HC1g",], mean)
+cols <- c( WT = "#3584c6", HC1g = "#fbb615", HC1j = "#e95c64" )
 
-palette(c("#F8766D","#00BA38","#619CFF"))
-
-pdf("../../../figures/stemloop_protein.pdf", width = 2, height = 1.67, pointsize = 7, useDingbats = F, bg = "white" )
+pdf( file.path( figdir, "stemloop_protein.pdf" ), width = 1.75, height = 1.3, pointsize = 6.5, useDingbats = F, bg = "white" )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(7,6.5,4,3) )
 par( oma = c(0,0.5,1,0) )
 par( xpd = NA )
 
 plot( wt.avg$elongation_time, wt.avg$ratio, 
-      type = "l", lwd = 1.5, col = palette()[3],
+      type = "l", lwd = 1.5, col = cols[ "WT" ],
       bty = "n",
       ylim = c(0,0.4),
       xlim = c(150, 400),
-      xlab = "",
+      axes = F,
+      xlab = NA,
       ylab = "citrine / mCherry\nfluorescence ratio"
 )
+axis( 1, lwd = 0.75, at = seq(150, 400, by=50), labels = c(NA, "200", NA, "300", NA, "400") )
+axis( 2, lwd = 0.75 )
 title( xlab = "predicted elongation time\n(arbitrary units)", line = 4.5 )
 
-lines( g.avg$elongation_time, g.avg$ratio, lwd = 1.5, col = palette()[1])
-lines( j.avg$elongation_time, j.avg$ratio, lwd = 1.5, col = palette()[2])
+lines( g.avg$elongation_time, g.avg$ratio, lwd = 1.5, col = cols[ "HC1g" ])
+lines( j.avg$elongation_time, j.avg$ratio, lwd = 1.5, col = cols[ "HC1j" ])
 
-points( medians$elongation_time, medians$ratio, pch = 20, col = as.factor(medians$strain))
+points( medians$elongation_time, medians$ratio, pch = 20, col = cols[ medians$strain ] )
 
-text(300, c(0.475, 0.4, 0.325 ), labels = c("no hairpin", "weak hairpin", "strong hairpin"), col = palette()[c(3,1,2)], adj=0 )
+legend( "topright", pch = 20, inset = c( -0.2, -0.6 ), 
+        legend = c("no stem loop", "weak stem loop", "strong stem loop"), 
+        col = cols, 
+        cex = 0.8,
+        bty = "n")
 
 dev.off()
+
+
 

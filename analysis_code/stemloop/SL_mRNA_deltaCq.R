@@ -4,7 +4,7 @@ library(dplyr)
 library(tidyverse)
 library(readxl)
 
-setwd("../../data/stemloop/SL_mRNA/")
+datadir <- "data/stemloop/SL_mRNA/" 
 
 #Assign the sample name to each well so that I can get a Cq value for them. 
 #Function to be able to match each plate to its Cq value sheet, 
@@ -31,21 +31,21 @@ LabelData <- function(smap, Cqvalues){
 
 #Organizing directories:
 
-mapname <- "PlateMap.xlsx"
+mapname <- file.path( datadir, "PlateMap.xlsx" )
 
-minzero <- "Citmin_Cit0/CitminandCit0 WT vs HP -  Quantification Cq Results_0.csv"
-threesix <- "Cit3_Cit6/Cit3andCit6 WT vs HP -  Quantification Cq Results_0.csv"
-ninemax <- "Cit9_CitMax/Cit9andCitX WT vs HP -  Quantification Cq Results_0.csv"
+minzero <- file.path( datadir, "Citmin_Cit0/CitminandCit0 WT vs HP -  Quantification Cq Results_0.csv" )
+threesix <- file.path( datadir, "Cit3_Cit6/Cit3andCit6 WT vs HP -  Quantification Cq Results_0.csv" )
+ninemax <- file.path( datadir, "Cit9_CitMax/Cit9andCitX WT vs HP -  Quantification Cq Results_0.csv" )
 
 #labelling Cq values using above function
-smap1 <- read_excel(mapname, sheet = "citMinandcit0", col_names = TRUE)
-Cqvalues1 <- read_csv(minzero, col_names = T, col_select = c("Well", "Target", "Cq")) # tibble
+smap1 <- read_excel( mapname, sheet = "citMinandcit0", col_names = TRUE )
+Cqvalues1 <- read_csv( minzero, col_names = T, col_select = c("Well", "Target", "Cq") ) # tibble
   
-smap2 <- read_excel(mapname, sheet = "cit3andcit6", col_names = TRUE)
-Cqvalues2 <- read_csv(threesix, col_names = T, col_select = c("Well", "Target", "Cq")) # tibble
+smap2 <- read_excel( mapname, sheet = "cit3andcit6", col_names = TRUE)
+Cqvalues2 <- read_csv( threesix, col_names = T, col_select = c("Well", "Target", "Cq") ) # tibble
 
-smap3 <- read_excel(mapname, sheet = "cit9andcitMax", col_names = TRUE)
-Cqvalues3 <- read_csv(ninemax, col_names = T, col_select = c("Well", "Target", "Cq")) # tibble
+smap3 <- read_excel( mapname, sheet = "cit9andcitMax", col_names = TRUE)
+Cqvalues3 <- read_csv( ninemax, col_names = T, col_select = c("Well", "Target", "Cq") ) # tibble
 
 data1 <- LabelData(smap = smap1, Cqvalues = Cqvalues1)
 data2 <- LabelData(smap = smap2, Cqvalues = Cqvalues2)
@@ -88,5 +88,5 @@ SeparateCqs <- SeparateCqs %>% rename("CqStd.mCh" = "CqStd.y")
 BioReps <- subset(SeparateCqs, select = c(Strain, Cit, Clone))
 BioReps$Cit_mCh <- SeparateCqs$Exp.Cit/SeparateCqs$Exp.mCh
 
-write.csv(BioReps, "J.WT.mRNA.csv", row.names=FALSE) 
+write.csv( BioReps, file.path( datadir, "J.WT.mRNA.csv" ), row.names=FALSE) 
 
