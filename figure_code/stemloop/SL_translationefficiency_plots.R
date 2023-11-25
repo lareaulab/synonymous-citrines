@@ -78,7 +78,7 @@ legend( "topright", pch = 20, inset = c( -0.2, -0.6 ),
 dev.off()
 
 
-
+## slightly different results from these two approaches? check this
 
 #Plotting ratio of SL to WT TE for each citrine 
 
