@@ -75,8 +75,9 @@ par( xpd = NA )
 plot( init$init_rate * 60, 
       1 - init$collide_fast,
       xlim = c(0,6),
-      ylim= c(0,1),
-      pch=20, 
+      ylim = c(0,1),
+      #pch=20, 
+      cex = 0.8,
       col=cols[["citmin"]],
       xlab="initiation [ribosomes / min]", 
       ylab="fraction successful\ninitiation attempts",
@@ -84,7 +85,8 @@ plot( init$init_rate * 60,
 
 points(init$init_rate * 60, 
        1 - init$collide_slow,
-       pch=20, 
+       #pch=20,
+       cex = 0.8,
        col=cols[["cit9"]] )
 
 axis( 2, at=c(0, 0.5, 1.0), lwd = 0.75)
