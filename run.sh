@@ -5,7 +5,7 @@
 ######
 
 # codon speeds of each construct
-R CMD BATCH figure_code/citrine_speeds_figure.R
+R CMD BATCH figure_code/citrine_speeds_tunney_figure.R
 
 # flow of citrine constructs (Tunney reanalysis)
 R CMD BATCH analysis_code/WT/WT_protein_analysis.R
@@ -18,8 +18,6 @@ R CMD BATCH figure_code/WT/WT_mRNA_plot.R
 # TE of citrine constructs (Tunney reanalysis)
 R CMD BATCH figure_code/WT/WT_TE_plot.R
 
-# (todo: supp figure with re-made strains)
-
 ######
 # figure 2: TASEP model and polysome profiles
 ######
@@ -28,7 +26,6 @@ R CMD BATCH figure_code/WT/WT_TE_plot.R
 R CMD BATCH figure_code/tasep_plots.R
 
 # polysome gradients
-# (todo: add polysome RNA-seq analysis code)
 R CMD BATCH figure_code/polysome_plots.R
 
 ######
@@ -64,7 +61,6 @@ R CMD BATCH figure_code/chimera_plot.R
 ######
 
 # main ciber-seq results
-# (todo: add RNA-seq analysis code)
 R CMD BATCH figure_code/ciber-seq_plot.R
 
 # individual crispri confirmations (protein)
@@ -74,12 +70,6 @@ R CMD BATCH figure_code/individual_CRISPRi/crispri_protein_plot.R
 # individual crispri confirmations (mRNA + protein)
 R CMD BATCH analysis_code/individual_CRISPRi/crispri_te_with_errorprop.R
 R CMD BATCH figure_code/individual_CRISPRi/crispri_te_plot.R
-
-# supp figure - ZEM citrine fusion confirming slow makes less protein
-
-# supp figure - growth defect controls
-R CMD BATCH analysis_code/individual_CRISPRi/crispri_growthdefectscontrols_protein_normgate.R
-R CMD BATCH figure_code/individual_CRISPRi/crispri_growthdefectcontrols_plot.R
 
 ######
 # figure 6: stem loops
@@ -96,7 +86,6 @@ R CMD BATCH figure_code/stemloop/SL_mRNA_plots.R # makes both the mrna plot and 
 # TE
 R CMD BATCH figure_code/stemloop/SL_translationefficiency_plots.R # makes both the TE plot and the TE ratio plot
 # this one looks a little different after my changes?
-
 
 #######################
 # supp figures
@@ -122,4 +111,3 @@ R CMD BATCH figure_code/CiBERseq/ZEM-cit_control_plot.R
 # CRISPRi growth defect controls
 R CMD BATCH analysis_code/individual_CRISPRi/crispri_growthdefectscontrols_protein_normgate.R
 R CMD BATCH figure_code/individual_CRISPRi/crispri_growthdefectcontrols_plot.R
-
