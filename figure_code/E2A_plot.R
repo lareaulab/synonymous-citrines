@@ -4,7 +4,7 @@ library(dplyr)
 datadir <- "data/E2A/"
 figdir <- "figures/"
 
-datafile <- paste0( datadir, "E2A_normgated_data_corrected.csv")
+datafile <- file.path( datadir, "E2A_normgated_data_corrected.csv")
 gated = read.csv( datafile, header=T)
 
 #verifying that the cit/mch is actually divided that way:
@@ -50,15 +50,11 @@ medians.scaled$cit.mCh = medians$cit.mCh/ medians.avg$cit.mCh[2]
 colsdark <- c("darkorange2", "magenta3")
 colslight <- c("#ffcc66", "#cb9ac6")
 
-all.matrix <- as.matrix( medians.avg[,2:4] )
-all.labels <- c( "cit/iRFP", "mCh/iRFP", "cit/mCh" )
-
-ind.matrix <- as.matrix( medians.avg[,2:3] )
-ind.labels <- c( "cit/iRFP", "mCh/iRFP")
+all.labels <- c( "citrine", "mCherry", "citrine /\nmCherry" )
 
 scaled.matrix <- as.matrix( medians.avg.scaled[, 2:4])
 
-pdf( paste0( figdir, "e2a.pdf"), width = 2, height = 1.3, pointsize = 6.5, useDingbats = F, bg = "white" )
+pdf( file.path( figdir, "e2a.pdf"), width = 2, height = 1.3, pointsize = 6.5, useDingbats = F, bg = "white" )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(4,6.5,4,5) )
 par( oma = c(0,0.5,1,0) )
@@ -66,10 +62,11 @@ par( xpd = NA )
 mp = barplot( scaled.matrix, 
               beside = TRUE,
               col = colslight,
-              ylab = "fluorescence ratio\n(scaled)",
+              ylab = "normalized\nfluorescence",
               ylim = c(0, 1),
               border = NA, axes = F,
-              names.arg = all.labels)
+              names.arg = all.labels, 
+              mgp = c(3, 0, 0), padj = 1)
 axis(2, at = c(0, 0.5, 1), lwd = 0.75)
 points( x = rep(as.numeric(mp), each = 3), 
         y = c( medians.scaled$cit.iRFP, medians.scaled$mCh.iRFP, medians.scaled$cit.mCh ),

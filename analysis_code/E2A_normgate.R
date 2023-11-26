@@ -9,7 +9,7 @@ library(tidyverse)
 
 #Load Data
 datadir <- "data/E2A/"
-flow_map_file = paste0( datadir, "flow_map.csv")
+flow_map_file = file.path( datadir, "flow_map.csv")
 
 PrimaryDirectory <- getwd()
 plots_on <- FALSE
@@ -35,18 +35,18 @@ flowDataGated <- flowCore::Subset( flowData, normresults )
 # diagnostic plots of flow data
 if(plots_on == TRUE) {
   #plot data with gates
-  png( paste0( datadir, "fsc-ssc-normgates.png" ), width = 20, height = 20, units = "in", res = 300 )
+  png( file.path( datadir, "fsc-ssc-normgates.png" ), width = 20, height = 20, units = "in", res = 300 )
   print( xyplot( `SSC.A` ~ `FSC.A`, data = flowData, smooth = FALSE, filter = normresults, ylim = c(0,20000), xlim = c(0,100000) ))
   dev.off()
   # plot gated data only
-  png( paste0( datadir, "fsc-ssc-normgated-only.png" ), width = 20, height = 20, units = "in", res = 300 )
+  png( file.path( datadir, "fsc-ssc-normgated-only.png" ), width = 20, height = 20, units = "in", res = 300 )
   print( xyplot( `SSC.A` ~ `FSC.A`, data = flowDataGated, smooth = FALSE, ylim = c(0,20000), xlim = c(0,100000) ))
   dev.off()
   # plot gated fluorescence data only
-  png( paste0( datadir, "fluor-normgated-only.png" ), width = 20, height = 20, units = "in", res = 300 )
+  png( file.path( datadir, "fluor-normgated-only.png" ), width = 20, height = 20, units = "in", res = 300 )
   print( xyplot( `Citrine.H` ~ `mCherry.H`, data = flowDataGated, smooth = FALSE, ylim = c(0,2000), xlim = c(0,10000) ))
   dev.off()
-  png( paste0( datadir, "fluor-all.png" ), width = 20, height = 20, units = "in", res = 300 )
+  png( file.path( datadir, "fluor-all.png" ), width = 20, height = 20, units = "in", res = 300 )
   print( xyplot( `Citrine.H` ~ `mCherry.H`, data = flowData, smooth = FALSE, ylim = c(0,2000), xlim = c(0,10000) ))
   dev.off()
 }
@@ -106,7 +106,7 @@ gated_data$cit.mCh.ratio.A.raw <- with( gated_data, Citrine.cor / mCherry.cor)
 
 gated_data <- na.omit(gated_data)
 
-write_csv(gated_data, paste0( datadir, "E2A_normgated_data_corrected.csv" ))
+write_csv(gated_data, file.path( datadir, "E2A_normgated_data_corrected.csv" ))
 
 # ci_ratio <- gated_data %>%
 #   filter(cit == "citMin") %>%
