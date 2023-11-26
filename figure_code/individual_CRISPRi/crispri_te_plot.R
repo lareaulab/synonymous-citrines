@@ -10,7 +10,8 @@ cols <- c(mRNA = "lightgrey", protein = "darkgrey")
 
 pdf( file.path( figdir, "crispri_te.pdf"), width = 1.75, height = 1.3, pointsize = 6.5, useDingbats = F, bg = "white" )
 par( mex = 0.65 ) # sets margin stuff
-par( mar = c(6,6.5,5,3) )
+#par( mar = c(6,6.5,5,3) )
+par( mar = c(8,6.5,3,3) )
 par( oma = c(0,0.5,1,0) )
 par( xpd = NA )
 mp <- barplot( t(plot_fc), beside = T,
@@ -23,6 +24,6 @@ axis( 2, lwd = 0.75 )
 ## plot error bars
 arrows( mp, t(plot_fc - plot_se), mp, t(plot_fc + plot_se ), angle=90, code=3, length = 0.02)
 
-legend( "topright", legend = c("mRNA", "protein"), 
-        fill = cols[ c("mRNA", "protein") ], border = NA, bty = "n", inset = c( 0, -0.75 ))
+legend( "bottomright", legend = c("mRNA", "protein"), 
+        fill = cols[ c("mRNA", "protein") ], border = NA, bty = "n", inset = c( -0.2, -1))
 dev.off()
