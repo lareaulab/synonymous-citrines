@@ -98,3 +98,28 @@ R CMD BATCH figure_code/stemloop/SL_translationefficiency_plots.R # makes both t
 # this one looks a little different after my changes?
 
 
+#######################
+# supp figures
+#######################
+
+######
+# figure S1: EFL WT strains 
+######
+
+# (the data are the same as figure 6)
+R CMD BATCH figure_code/WT/EFL_protein_plot.R
+R CMD BATCH figure_code/WT/EFL_mRNA_plot.R
+R CMD BATCH figure_code/WT/EFL_TE_plot.R
+
+######
+# figure S3: CRISPRi controls
+######
+
+# ZEM fusion fluorescence
+R CMD BATCH analysis_code/CiBER-seq/ZEM-cit_control_protein_normgate.R
+R CMD BATCH figure_code/CiBERseq/ZEM-cit_control_plot.R
+
+# CRISPRi growth defect controls
+R CMD BATCH analysis_code/individual_CRISPRi/crispri_growthdefectscontrols_protein_normgate.R
+R CMD BATCH figure_code/individual_CRISPRi/crispri_growthdefectcontrols_plot.R
+
