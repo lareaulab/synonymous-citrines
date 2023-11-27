@@ -110,7 +110,7 @@ plot( te.ratio$elongation_time.wt, te.ratio$ratio,
       xlim = c(150,400),
       ylim = c(0, 1),
       xlab = "",
-      ylab = "translation efficiency\nratio, SL / WT"
+      ylab = "SL / no SL\nTE ratio"
 )
 axis( 1, lwd = 0.75, at = seq(150, 400, by =50), labels = c(NA, "200", NA, "300", NA, "400") )
 axis( 2, lwd = 0.75 )
