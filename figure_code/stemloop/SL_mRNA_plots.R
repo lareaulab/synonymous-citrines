@@ -76,7 +76,7 @@ plot( divided$elongation_time, divided$ratio,
       xlim = c(150,400),
       ylim = c(0, 2),
       xlab = "",
-      ylab = "SL / WT\n mRNA ratio"
+      ylab = "SL / no SL\n mRNA ratio"
 )
 axis( 1, lwd = 0.75, at = seq(150, 400, by =50), labels = c(NA, "200", NA, "300", NA, "400") )
 axis( 2, lwd = 0.75 )
