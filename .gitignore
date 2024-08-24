@@ -1,4 +1,5 @@
 .DS_Store
+.Rhistory
 
 ## intermediate files that are larger than github's size limit
 data/E2A/E2A_normgated_data_corrected.csv
