@@ -30,7 +30,7 @@ cit20medians <- subset(cit20medians, cit20medians$clone != "C" | cit20medians$ci
 cit20medians <- subset(cit20medians, cit20medians$clone != "A" | cit20medians$cit != "cit3")
 
 
-pdf(paste0(figdir, "standardized_citrines.pdf"), width = 1.75, height = 1.3, pointsize = 6.5, useDingbats = F, bg = "white" )
+cairo_pdf( paste0(figdir, "standardized_citrines.pdf"), width = 1.75, height = 1.3, pointsize = 6.5 )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(7,6.5,2,3) )
 par( oma = c(0,0.5,1,0) )

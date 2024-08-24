@@ -46,27 +46,26 @@ medians.scaled$mCh.iRFP = medians$mCh.iRFP / medians.avg$mCh.iRFP[2]
 medians.scaled$cit.mCh = medians$cit.mCh/ medians.avg$cit.mCh[2]
 
 
-#colsdark <- c("#f26739", "#983794")
 colsdark <- c("darkorange2", "magenta3")
 colslight <- c("#ffcc66", "#cb9ac6")
 
-all.labels <- c( "citrine", "mCherry", "citrine /\nmCherry" )
+all.labels <- c( "cit/iRFP", "mCh/iRFP", "cit/mCh" )
 
 scaled.matrix <- as.matrix( medians.avg.scaled[, 2:4])
 
 cairo_pdf( file.path( figdir, "e2a.pdf"), width = 2, height = 1.3, pointsize = 6.5 )
 par( mex = 0.65 ) # sets margin stuff
-par( mar = c(4,6.5,4,5) )
+par( mar = c(3,6.5,5,5) )
 par( oma = c(0,0.5,1,0) )
 par( xpd = NA )
 mp = barplot( scaled.matrix, 
               beside = TRUE,
               col = colslight,
-              ylab = "normalized\nfluorescence",
+              ylab = "fluorescence ratio\n(scaled)",
               ylim = c(0, 1),
               border = NA, axes = F,
               names.arg = all.labels, 
-              mgp = c(3, 0, 0), padj = 1)
+              mgp = c(3, 0, 0) )#, padj = 1)
 axis(2, at = c(0, 0.5, 1), lwd = 0.75)
 points( x = rep(as.numeric(mp), each = 3), 
         y = c( medians.scaled$cit.iRFP, medians.scaled$mCh.iRFP, medians.scaled$cit.mCh ),

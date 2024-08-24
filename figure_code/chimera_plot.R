@@ -34,7 +34,7 @@ firsthalf <- c( citmin = 'magenta3', cit9 = 'darkorange2', slowfast = 'darkorang
 secondhalf <- c( citmin = 'magenta3', cit9 = 'darkorange2', slowfast = 'magenta3', fastslow = 'darkorange2' )
 
 
-pdf( paste0( figdir, "chimeras.pdf"), width = 2.01, height = 1.3, pointsize = 6.5, useDingbats = F, bg = "white" )
+cairo_pdf( paste0( figdir, "chimeras.pdf"), width = 2.01, height = 1.3, pointsize = 6.5 )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(7,6.5,2,7) ) # added 4 lines to right margin, each line is 0.065 inches
 par( oma = c(0,0.5,1,0) )

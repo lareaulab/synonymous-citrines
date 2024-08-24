@@ -29,16 +29,19 @@ row.names(c9ci_ratios) <- c9ci_ratios$gene
 ord <- c( "HO", c9ci_ratios$gene[ order(c9ci_ratios$c9ci, decreasing = T) ][1:6] )
 c9ci_ratios <- c9ci_ratios[ ord, ]
 
-pdf( file.path( figdir, "crispri_flow.pdf"), width = 2, height = 1.3, pointsize = 6.5, useDingbats = F, bg = "white" )
+cairo_pdf( file.path( figdir, "crispri_flow.pdf"), width = 1.75, height = 1.3, pointsize = 6.5 )
+#cairo_pdf( file.path( figdir, "crispri_flow.pdf"), width = 2, height = 1.3, pointsize = 6.5 )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(8,6.5,3,3) )
+par( mar = c(8,6.5,3,1) )
 par( oma = c(0,0.5,1,0) )
 par( xpd = F )
 mp <- barplot( c9ci_ratios$c9ci,
                ylim = c(0,0.5),
                space = 0.6,
                axes = F,
-               ylab = "slow citrine as\nfraction of fast citrine",
+               #ylab = "slow citrine as\nfraction of fast citrine",
+               ylab = "slow / fast citrine",
                xlab = NA,
                border = NA,
                col = "darkgrey"
