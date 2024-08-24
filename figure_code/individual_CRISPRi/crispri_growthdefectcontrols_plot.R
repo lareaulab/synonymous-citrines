@@ -32,7 +32,7 @@ mediacols <- c( tet = "#39c0c4", SCD = "#99cccc")
 labels <- c( tet = "induced", SCD = "uninduced" )
 genes <- c("CDC6", "IRRI")
 
-pdf( file.path( figdir, "growthcontrols.pdf" ), width = 1.5, height = 1.3, pointsize = 6.5, useDingbats = F, bg = "white" )
+cairo_pdf( file.path( figdir, "growthcontrols.pdf" ), width = 1.5, height = 1.3, pointsize = 6.5 )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(4,6.5,5,3) )
 par( oma = c(0,0.5,1,0) )
