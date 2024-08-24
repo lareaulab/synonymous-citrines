@@ -24,6 +24,8 @@ R CMD BATCH figure_code/WT/EFL_mRNA_plot.R
 R CMD BATCH figure_code/WT/EFL_TE_plot.R
 
 # updated through here, and also stemloop figure. eventually remove old WT analysis code and WT data
+# also updated polysome code
+# remember to replace old polysome.sh with new one in analysis_code
 
 ######
 # figure 2: TASEP model and polysome profiles
