@@ -2,6 +2,7 @@
 
 ######
 # figure 1: new data on wildtype reporters, newly constructed for this paper based on Tunney et al
+# updated completely 8/23
 ######
 
 # codon speeds of each construct
@@ -23,14 +24,13 @@ R CMD BATCH figure_code/WT/EFL_mRNA_plot.R
 # TE of citrine constructs
 R CMD BATCH figure_code/WT/EFL_TE_plot.R
 
-# updated through here, and also stemloop figure
-# also updated fig 2 polysome code, but not yet fig 2 TASEP code
 
 ######
 # figure 2: TASEP model and polysome profiles
+# updated completely 8/23
 ######
 
-# TASEP
+# TASEP (also makes two supp. figures)
 R CMD BATCH figure_code/tasep_plots.R
 
 # polysome gradients
@@ -38,6 +38,7 @@ R CMD BATCH figure_code/polysome_plots.R
 
 ######
 # figure 3: RQC knockouts and E2A reporter
+# updated completely 8/23
 ######
 
 # RQC knockouts
@@ -81,6 +82,7 @@ R CMD BATCH figure_code/individual_CRISPRi/crispri_te_plot.R
 
 ######
 # figure 6: stem loops
+# updated completely 8/23
 ######
 
 # the data are from the same run as figure 1
