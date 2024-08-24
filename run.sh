@@ -7,7 +7,10 @@
 # codon speeds of each construct
 R CMD BATCH figure_code/citrine_speeds_tunney_figure.R
 
-# (the data are from the same run as figure 6, stemloop)
+# construct scores relative to endogenous genes
+R CMD BATCH figure_code/endogenous_histogram.R
+
+# (the flow and qPCR data are from the same run as figure 6, stemloop)
 
 # flow of citrine constructs
 R CMD BATCH analysis_code/stemloop/stemloop_protein_normgate.R
@@ -19,6 +22,8 @@ R CMD BATCH figure_code/WT/EFL_mRNA_plot.R
 
 # TE of citrine constructs
 R CMD BATCH figure_code/WT/EFL_TE_plot.R
+
+# updated through here, and also stemloop figure. eventually remove old WT analysis code and WT data
 
 ######
 # figure 2: TASEP model and polysome profiles
@@ -79,14 +84,7 @@ R CMD BATCH figure_code/individual_CRISPRi/crispri_te_plot.R
 
 # the data are from the same run as figure 1
 
-# protein
-R CMD BATCH figure_code/stemloop/SL_protein_plot.R
-
-# mRNA
-R CMD BATCH figure_code/stemloop/SL_mRNA_plots.R # makes both the mrna plot and the mrna ratio plot
-
-# TE
-R CMD BATCH figure_code/stemloop/SL_translationefficiency_plots.R # makes both the TE plot and the TE ratio plot
+R CMD BATCH figure_code/stemloop_figures.R
 
 #######################
 # supp figures
