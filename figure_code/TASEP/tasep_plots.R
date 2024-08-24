@@ -9,7 +9,8 @@ cols <- c( citmin = 'magenta3', cit9 = 'darkorange2')
 cols2 <- c( citmin = rgb( t(col2rgb('magenta3')), alpha = 200, max = 255),
             cit9 = rgb( t(col2rgb('darkorange2')), alpha = 200, max = 255) )
 
-pdf( file.path( figdir, "tasep_protein.pdf" ), width=1.75, height=1.3, pointsize = 6.5, useDingbats=FALSE, bg = "white")
+################
+cairo_pdf( file.path( figdir, "tasep_protein.pdf" ), width=1.75, height=1.3, pointsize = 6.5 )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(7,6.5,2,3) )
 par( oma = c(0,0.5,1,0) )
@@ -37,7 +38,7 @@ dev.off()
 
 
 ################
-pdf( file.path( figdir, "tasep_te.pdf" ), width=1.75, height=1.3, pointsize = 6.5, useDingbats=FALSE, bg = "white")
+cairo_pdf( file.path( figdir, "tasep_te.pdf" ), width=1.75, height=1.3, pointsize = 6.5 )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(7,6.5,2,3) )
 par( oma = c(0,0.5,1,0) )
@@ -59,7 +60,7 @@ dev.off()
 
 
 ################
-pdf( file.path( figdir, "tasep_init_occlusion.pdf" ), width=1.75, height=1.3, pointsize = 6.5, useDingbats=FALSE, bg = "white")
+cairo_pdf( file.path( figdir, "tasep_init_occlusion.pdf" ), width=1.75, height=1.3, pointsize = 6.5 )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(7,6.5,2,3) )
 par( oma = c(0,0.5,1,0) )

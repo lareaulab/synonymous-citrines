@@ -54,7 +54,7 @@ all.labels <- c( "citrine", "mCherry", "citrine /\nmCherry" )
 
 scaled.matrix <- as.matrix( medians.avg.scaled[, 2:4])
 
-pdf( file.path( figdir, "e2a.pdf"), width = 2, height = 1.3, pointsize = 6.5, useDingbats = F, bg = "white" )
+cairo_pdf( file.path( figdir, "e2a.pdf"), width = 2, height = 1.3, pointsize = 6.5 )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(4,6.5,4,5) )
 par( oma = c(0,0.5,1,0) )

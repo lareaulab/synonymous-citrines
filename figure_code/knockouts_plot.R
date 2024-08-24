@@ -34,7 +34,7 @@ labels <- c(expression(paste(italic('gcn1'), Delta)),
             expression(paste(italic('syh1'), Delta)),
             "WT")
 
-pdf( paste0(figdir, "rqc_knockouts.pdf"), width = 3.5, height = 1.4, pointsize = 6.5, useDingbats = F, bg = "white" )
+cairo_pdf( paste0(figdir, "rqc_knockouts.pdf"), width = 3.5, height = 1.4, pointsize = 6.5 )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(9,6.5,2,10) )
 par( oma = c(0,0.5,1,0) )
