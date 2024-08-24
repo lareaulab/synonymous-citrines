@@ -1,6 +1,7 @@
+# new citrine constructs for this paper - TE measurements combining flow and qPCR data
+
 datadir <- "data/stemloop/"
 figdir <- "figures/"
-
 
 ##protein
 protein_ratios <- read.csv(file.path(datadir, "SL_protein/normgated_data_bg_corrected.csv"))
@@ -36,7 +37,7 @@ te$te <- with( te, ratio / cit_mch)
 
 cols <- c( citmin = "magenta3", cit0 = "royalblue2", cit3 = "green3", cit6 = "gold1", cit9 = "darkorange2", citmax = "red2")
 
-pdf( file.path(figdir, "efl_citrine_te.pdf"), width = 1.75, height = 1.3, pointsize = 6.5, useDingbats = F, bg = "white" )
+cair_pdf( file.path(figdir, "efl_citrine_te.pdf"), width = 1.75, height = 1.3, pointsize = 6.5 )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(7,6.5,2,3) )
 par( oma = c(0,0.5,1,0) )
@@ -52,6 +53,5 @@ plot( te$elongation_time, te$te,
 )
 axis( 1, lwd = 0.75, at = seq(150, 400, by =50), labels = c(NA, "200", NA, "300", NA, "400") )
 axis( 2, lwd = 0.75 )
-#axis( 2, lwd = 0.75, at = c(0,0.2,0.4,0.6,0.8) )
 title( xlab = "predicted elongation time\n(arbitrary units)", line = 4.5 )
 dev.off()
