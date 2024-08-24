@@ -1,8 +1,6 @@
-#load useful libraries
-library(dplyr)
-library(tidyverse)
+# new citrine constructs for this paper - mRNA measurements with qPCR
 
-#set up the directories (this file will go in the plotting code)
+#set up the directories
 datadir <- "data/stemloop/SL_mRNA/" 
 figdir <- "figures/"
 
@@ -22,7 +20,7 @@ WTratios$elongation_time <- cit[ tolower(WTratios$Cit), 1 ] # look up elongation
 #mRNA levels plot
 cols <- c( citMin = "magenta3", cit0 = "royalblue2", cit3 = "green3", cit6 = "gold1", cit9 = "darkorange2", citMax = "red2")
 
-pdf( file.path( figdir, "efl_citrine_mrna.pdf" ), width = 1.75, height = 1.3, pointsize = 6.5, useDingbats = F, bg = "white" )
+cairo_pdf( file.path( figdir, "efl_citrine_mrna.pdf" ), width = 1.75, height = 1.3, pointsize = 6.5 )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(7,6.5,2,3) )
 par( oma = c(0,0.5,1,0) )

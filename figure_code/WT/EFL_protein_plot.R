@@ -1,9 +1,7 @@
-#load useful libraries
-library(dplyr)
-library(tidyverse)
+# new citrine constructs for this paper - protein measurements with flow cytometry
 
 #set up the directories (this file will go in the plotting code)
-datadir <- "data/stemloop/SL_protein/"
+datadir <- "data/stemloop/SL_protein/" # final reporter data is in the flow run from the stemloop experiment
 figdir <- "figures/"
 
 #load in the data from the csv's in the SL folder:
@@ -26,7 +24,7 @@ WTmedians <- medians[medians$strain == "WT", ]
 speeds <- WTmedians$elongation_time
 cols <- c( citmin = "magenta3", cit0 = "royalblue2", cit3 = "green3", cit6 = "gold1", cit9 = "darkorange2", citmax = "red2")
 
-pdf( file.path( figdir, "efl_citrine_fluor.pdf" ), width = 1.75, height = 1.3, pointsize = 6.5, useDingbats = F, bg = "white" )
+cairo_pdf( file.path( figdir, "efl_citrine_fluor.pdf" ), width = 1.75, height = 1.3, pointsize = 6.5 )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(7,6.5,2,3) )
 par( oma = c(0,0.5,1,0) )
