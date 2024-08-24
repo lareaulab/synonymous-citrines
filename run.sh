@@ -2,7 +2,6 @@
 
 ######
 # figure 1: new data on wildtype reporters, newly constructed for this paper based on Tunney et al
-# updated completely 8/23
 ######
 
 # codon speeds of each construct
@@ -27,7 +26,6 @@ R CMD BATCH figure_code/WT/EFL_TE_plot.R
 
 ######
 # figure 2: TASEP model and polysome profiles
-# updated completely 8/23
 ######
 
 # TASEP (also makes two supp. figures)
@@ -38,7 +36,6 @@ R CMD BATCH figure_code/polysome_plots.R
 
 ######
 # figure 3: RQC knockouts and E2A reporter
-# updated completely 8/23
 ######
 
 # RQC knockouts
@@ -76,13 +73,9 @@ R CMD BATCH figure_code/ciber-seq_plot.R
 R CMD BATCH analysis_code/individual_CRISPRi/crispri_protein_normgate.R
 R CMD BATCH figure_code/individual_CRISPRi/crispri_protein_plot.R
 
-# individual crispri confirmations (mRNA + protein)
-R CMD BATCH analysis_code/individual_CRISPRi/crispri_te_with_errorprop.R
-R CMD BATCH figure_code/individual_CRISPRi/crispri_te_plot.R
 
 ######
 # figure 6: stem loops
-# updated completely 8/23
 ######
 
 # the data are from the same run as figure 1
@@ -91,7 +84,9 @@ R CMD BATCH figure_code/stemloop_figures.R
 
 #######################
 # supp figures
+# not updated yet
 #######################
+
 
 ######
 # figure S1:
@@ -109,3 +104,7 @@ R CMD BATCH figure_code/CiBERseq/ZEM-cit_control_plot.R
 # CRISPRi growth defect controls
 R CMD BATCH analysis_code/individual_CRISPRi/crispri_growthdefectscontrols_protein_normgate.R
 R CMD BATCH figure_code/individual_CRISPRi/crispri_growthdefectcontrols_plot.R
+
+# individual crispri confirmations (mRNA + protein)
+R CMD BATCH analysis_code/individual_CRISPRi/crispri_te_with_errorprop.R
+R CMD BATCH figure_code/individual_CRISPRi/crispri_te_plot.R

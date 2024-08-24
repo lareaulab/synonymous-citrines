@@ -7,5 +7,6 @@ data/E2A/E2A_normgated_data_corrected.csv
 data/RQC_knockouts_and_chimeras/knockouts_chimeras_normgated_bg_corrected.csv
 data/individual_CRISPRi/CRISPRi_protein/crispri_normgated_data_bg_corrected.csv
 data/individual_CRISPRi/growth_defect_controls/crispri_growth_defect_controls_normgated_data.csv
+data/5p_standardized/5standardized_normgated_data_bg_corrected.csv
 data/stemloop/SL_protein/normgated_data_bg_corrected.csv
 data/endogenous/
