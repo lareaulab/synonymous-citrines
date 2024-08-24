@@ -79,22 +79,15 @@ R CMD BATCH figure_code/individual_CRISPRi/crispri_protein_plot.R
 ######
 
 # the data are from the same run as figure 1
-
 R CMD BATCH figure_code/stemloop_figures.R
+
 
 #######################
 # supp figures
-# not updated yet
 #######################
 
-
 ######
-# figure S1:
-######
-
-
-######
-# figure S3: CRISPRi controls
+# supp figures: CRISPRi and CiBER-seq controls
 ######
 
 # ZEM fusion fluorescence
