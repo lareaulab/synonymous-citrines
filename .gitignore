@@ -1,5 +1,6 @@
 .DS_Store
 .Rhistory
+.RData
 *.Rout
 
 ## intermediate files that are larger than github's size limit
