@@ -46,8 +46,11 @@ medians.scaled$mCh.iRFP = medians$mCh.iRFP / medians.avg$mCh.iRFP[2]
 medians.scaled$cit.mCh = medians$cit.mCh/ medians.avg$cit.mCh[2]
 
 
-colsdark <- c("darkorange2", "magenta3")
-colslight <- c("#ffcc66", "#cb9ac6")
+#colsdark <- c("darkorange2", "magenta3")
+#colslight <- c("#ffcc66", "#cb9ac6")
+
+colsdark <- c( cit9 = "#365C8DFF", citmin = "#9FDA3AFF" )
+colslight <- c( cit9 = "#6699CCFF", citmin = "#CCFF99FF" )
 
 all.labels <- c( "cit/iRFP", "mCh/iRFP", "cit/mCh" )
 

@@ -4,10 +4,13 @@ figdir <- "figures/"
 init <- read.delim( file.path( datadir, "scan_init_withlife.txt" ), header=TRUE)
 init$te_ratio <- with( init, (nprot_slow / mrna_slow) / (nprot_fast / mrna_fast) )
     
-cols <- c( citmin = 'magenta3', cit9 = 'darkorange2')
+#cols <- c( citmin = 'magenta3', cit9 = 'darkorange2')
+#cols2 <- c( citmin = rgb( t(col2rgb('magenta3')), alpha = 200, max = 255),
+#            cit9 = rgb( t(col2rgb('darkorange2')), alpha = 200, max = 255) )
 
-cols2 <- c( citmin = rgb( t(col2rgb('magenta3')), alpha = 200, max = 255),
-            cit9 = rgb( t(col2rgb('darkorange2')), alpha = 200, max = 255) )
+cols <- c(citmin = "#9FDA3AFF", cit9 = "#365C8DFF" )
+cols2 <- c(citmin = "#9FDA3AC8", cit9 = "#365C8DC8" ) ## slightly transparent
+
 
 ################
 cairo_pdf( file.path( figdir, "tasep_protein.pdf" ), width=1.75, height=1.3, pointsize = 6.5 )

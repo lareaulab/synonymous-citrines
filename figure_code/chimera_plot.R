@@ -26,13 +26,17 @@ names(cit) = c("time")
 
 xpoints <- cit[ ratios$cit, ]
 
-#desc <- c( ci = 'fast', c9 = 'slow', Sphinx = 'slow:fast', Lion = 'fast:slow')
 desc <- c( citmin = 'fast', cit9 = 'slow', slowfast = 'slow:fast', fastslow = 'fast:slow')
 
-cols <- c( citmin = 'magenta3', cit9 = 'darkorange2', slowfast = 'darkgray', fastslow = 'darkgray' )
-firsthalf <- c( citmin = 'magenta3', cit9 = 'darkorange2', slowfast = 'darkorange2', fastslow = 'magenta3' )
-secondhalf <- c( citmin = 'magenta3', cit9 = 'darkorange2', slowfast = 'magenta3', fastslow = 'darkorange2' )
+# cols <- c( citmin = 'magenta3', cit9 = 'darkorange2', slowfast = 'darkgray', fastslow = 'darkgray' )
+# firsthalf <- c( citmin = 'magenta3', cit9 = 'darkorange2', slowfast = 'darkorange2', fastslow = 'magenta3' )
+# secondhalf <- c( citmin = 'magenta3', cit9 = 'darkorange2', slowfast = 'magenta3', fastslow = 'darkorange2' )
 
+fastcol <- "#9FDA3AFF"
+slowcol <- "#365C8DFF"
+cols <- c( cit9 = slowcol, citmin = fastcol, slowfast = 'darkgray', fastslow = 'darkgray' )
+firsthalf <- c( citmin = fastcol, cit9 = slowcol, slowfast = slowcol, fastslow = fastcol )
+secondhalf <- c( citmin = fastcol, cit9 = slowcol, slowfast = fastcol, fastslow = slowcol )
 
 cairo_pdf( paste0( figdir, "chimeras.pdf"), width = 2.01, height = 1.3, pointsize = 6.5 )
 par( mex = 0.65 ) # sets margin stuff

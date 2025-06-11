@@ -69,7 +69,10 @@ midpointsC <- sapply( 1:9, function(i)( (divC[i] + divC[i+1])/2 ) )
 
 yticks = seq(0, 0.2, by = 0.1)
 
-cols <- c( citmin = "magenta3", cit0 = "royalblue2", cit3 = "green3", cit6 = "gold1", cit9 = "darkorange2", citmax = "red2")
+#cols <- c( citmin = "magenta3", cit0 = "royalblue2", cit3 = "green3", cit6 = "gold1", cit9 = "darkorange2", citmax = "red2")
+cols <- rev(viridis(8)[2:7])
+names(cols) <- c( "citmin", "cit0", "cit3", "cit6", "cit9", "citmax" )
+
 
 # scaling to get the line graphs underneath the polysome trace
 mult = 5.5 
