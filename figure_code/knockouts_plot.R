@@ -21,7 +21,9 @@ ratios[ ratios$sample %in% hets, "ratio" ] <- NA
 
 xpoints <- c(jitter( rep(1:8, each = 6), amount = 0.15 ), rep(9, 2))
 
-cols <- c("darkorange2", "magenta3")
+#cols <- c("darkorange2", "magenta3")
+cols <- c( slow = "#365C8DFF", fast = "#9FDA3AFF")
+
 collist <- c( rep( rep( cols, each = 3), 8), cols) 
 
 labels <- c(expression(paste(italic('gcn1'), Delta)),

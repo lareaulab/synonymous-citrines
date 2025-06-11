@@ -11,7 +11,9 @@ citrines <- c("citmin", "cit0", "cit3", "cit6", "cit9", "citmax")
 profile <- profile[rev(citrines),] # just the original 6
 
 cols <- colorRampPalette(c("white", "blue"))(128)[1:96] # just use the lighter blue part of this palette
-citrinecols <- c( citmin = "magenta3", cit0 = "royalblue2", cit3 = "green3", cit6 = "gold1", cit9 = "darkorange2", citmax = "red2")
+#citrinecols <- c( citmin = "magenta3", cit0 = "royalblue2", cit3 = "green3", cit6 = "gold1", cit9 = "darkorange2", citmax = "red2")
+citrinecols <- rev(viridis(8)[2:7])
+names(citrinecols) <- c( "citmin", "cit0", "cit3", "cit6", "cit9", "citmax" )
 
 
 cairo_pdf( file.path( figdir, "citrines_tunney.pdf"), width = 3.5, height = 1, pointsize = 6.5 )

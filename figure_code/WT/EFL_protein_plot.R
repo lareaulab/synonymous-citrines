@@ -22,7 +22,9 @@ WTmedians <- medians[medians$strain == "WT", ]
 
 #protein output plot
 speeds <- WTmedians$elongation_time
-cols <- c( citmin = "magenta3", cit0 = "royalblue2", cit3 = "green3", cit6 = "gold1", cit9 = "darkorange2", citmax = "red2")
+#cols <- c( citmin = "magenta3", cit0 = "royalblue2", cit3 = "green3", cit6 = "gold1", cit9 = "darkorange2", citmax = "red2")
+cols <- rev(viridis(8)[2:7])
+names(cols) <- c( "citmin", "cit0", "cit3", "cit6", "cit9", "citmax" )
 
 cairo_pdf( file.path( figdir, "efl_citrine_fluor.pdf" ), width = 1.75, height = 1.3, pointsize = 6.5 )
 par( mex = 0.65 ) # sets margin stuff
