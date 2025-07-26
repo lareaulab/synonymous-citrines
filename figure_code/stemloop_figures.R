@@ -92,7 +92,8 @@ endog_with_te$per_rna[is.infinite(endog_with_te$per_rna )] <- NA
 ######
 
 # plotting colors
-slcols <- c( WT = "#000000", HC1g = "#BB90C2", HC1j = "#8D5B47" ) # colors for stemloops
+#slcols <- c( WT = "#000000", HC1g = "#BB90C2", HC1j = "#8D5B47" ) # colors for stemloops
+slcols <- c( WT = "#000000", HC1g = "#999999", HC1j = "#CCCCCC" ) # greyscale colors for stemloops (100%, 40%, 20%)
 #citcols <- c( citmin = "magenta3", cit0 = "royalblue2", cit3 = "green3", cit6 = "gold1", cit9 = "darkorange2", citmax = "red2")
 citcols <- rev(viridis(8)[2:7])
 names(citcols) <- c( "citmin", "cit0", "cit3", "cit6", "cit9", "citmax" )
