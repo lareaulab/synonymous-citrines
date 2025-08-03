@@ -41,47 +41,60 @@ rpg1.p <- t.test( rpg1$Relative[rpg1$Sample == "HO"], rpg1$Relative[rpg1$Sample 
 rpg1.p <- round( rpg1.p, 3 )
 # 0.166
 
-cairo_pdf( file.path( figdir, "fun12_qpcr.pdf"), width = 1.3, height = 1.3, pointsize = 6.5 )
+cairo_pdf( file.path( figdir, "fun12_qpcr.pdf"), width = 1.2, height = 1.3, pointsize = 6.5 )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(6,6.5,2,2) )
 par( oma = c(0,0.5,2,0) )
 par( xpd = NA )
 # plot the averages as a barplot
 max <- max(fun12$Relative)
-bp <- barplot( fun12.avg$Relative, names.arg = name[fun12.avg$Sample], 
+bp <- barplot( fun12.avg$Relative, #names.arg = name[fun12.avg$Sample], 
                xlab = "CRISPRi target",
                ylab = "relative mRNA\nabundance, FUN12",
-               ylim = c(0, max)
+               ylim = c(0, max),
+               axes = F,
+               border = NA,
+               col = "grey80"
 )
+axis(1, labels = name[fun12.avg$Sample], at = bp, font = 3, tick = F, lwd = 0.75 )
+axis(2, lwd = 0.75 )
+
+
 mps <- bp[,1]
 names(mps) <- fun12.avg$Sample
 # add the individual ratios
 points( mps[ fun12$Sample ], fun12$Relative, pch = 19 )
 # p value
-segments(mps[1], max*1.1, mps[2])
+segments(mps[1], max*1.1, mps[2], lwd = 0.75)
 text( mean(mps), max*1.1, labels = paste0("p = ", fun12.p), pos = 3)
 dev.off()
 
 
 
-cairo_pdf( file.path( figdir, "rpg1_qpcr.pdf"), width = 1.3, height = 1.3, pointsize = 6.5 )
+cairo_pdf( file.path( figdir, "rpg1_qpcr.pdf"), width = 1.2, height = 1.3, pointsize = 6.5 )
 par( mex = 0.65 ) # sets margin stuff
 par( mar = c(6,6.5,2,2) )
 par( oma = c(0,0.5,2,0) )
 par( xpd = NA )
 # plot the averages as a barplot
 max <- max(rpg1$Relative)
-bp <- barplot( rpg1.avg$Relative, names.arg = name[rpg1.avg$Sample], 
+bp <- barplot( rpg1.avg$Relative, #names.arg = name[rpg1.avg$Sample], 
                xlab = "CRISPRi target",
                ylab = "relative mRNA\nabundance, RPG1",
-               ylim = c(0, max)
+               ylim = c(0, max),
+               axes = F,
+               border = NA,
+               col = "grey80"
 )
+axis(1, labels = name[rpg1.avg$Sample], at = bp, font = 3, tick = F, lwd = 0.75 )
+axis(2, lwd = 0.75 )
+
 mps <- bp[,1]
 names(mps) <- rpg1.avg$Sample
 # add the individual ratios
 points( mps[ rpg1$Sample ], rpg1$Relative, pch = 19 )
 # p value
-segments(mps[1], max*1.1, mps[2])
+segments(mps[1], max*1.1, mps[2], lwd = 0.75)
 text( mean(mps), max*1.1, labels = paste0("p = ", rpg1.p), pos = 3)
 dev.off()
 

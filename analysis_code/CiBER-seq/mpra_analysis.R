@@ -1,18 +1,20 @@
 options(stringsAsFactors = FALSE)
 library("mpra")
 
+datadir <- "data/ciBERseq/ciBERseq/"
+
 # data
-counts <- read.delim( "counts_all.txt", stringsAsFactors = FALSE, row.names = 1, header = T )
+counts <- read.delim( file.path( datadir, "counts_all.txt"), row.names = 1, header = T )
 
 # other information
-grna <- read.delim("grna-assign-barcode-grna-good.txt", stringsAsFactors = FALSE, row.names = 1, header = T)
-target <- read.delim("guide-good-targets-171010.txt", stringsAsFactors = FALSE, header = T)
-empty <- read.delim("mod-probably-empty.txt", stringsAsFactors = FALSE, header = FALSE)
+grna <- read.delim( file.path( datadir, "grna-assign-barcode-grna-good.txt" ), row.names = 1, header = T)
+target <- read.delim( file.path( datadir, "guide-good-targets-171010.txt" ), header = T)
+empty <- read.delim( file.path( datadir, "mod-probably-empty.txt" ), header = FALSE)
 
-if (!file.exists("SGD_features.tab")) {
-  sgd <- download.file('https://downloads.yeastgenome.org/curation/chromosomal_feature/SGD_features.tab', destfile = "../SGD_features.tab")
-}
-sgd <- read.delim("SGD_features.tab", header = FALSE, quote = "",
+# if (!file.exists("SGD_features.tab")) {
+#   sgd <- download.file('https://downloads.yeastgenome.org/curation/chromosomal_feature/SGD_features.tab', destfile = "../SGD_features.tab")
+# }
+sgd <- read.delim( file.path( datadir, "SGD_features.tab" ), header = FALSE, quote = "",
                   col.names = c("sgdid", "type", "qual", "name", "gene", "alias",
                                 "parent", "sgdid2", "chrom", "start", "end",
                                 "strand", "genpos", "cver", "sver", "desc"))
@@ -49,7 +51,6 @@ run_mpra <- function( data, sample ) {
                            normalize = TRUE, model_type = "indep_groups", plot = TRUE)
 
   out <- topTable(mpralm_fit, coef = 2, number = Inf)
-  out$Unind <- out$AveExpr - out$logFC/2 # RNA to DNA ratio in the uninduced sample, for quality control
   
   out$yorf <- target[match(row.names(out), target$Guide), "Yorf1"]
   out$yorfs <- target[match(row.names(out), target$Guide), "Yorfs"]
@@ -73,17 +74,35 @@ fast$gene[which(fast$gene == "")] = fast$yorf[which(fast$gene == "")]
 slow$gene[which(slow$gene == "")] = slow$yorf[which(slow$gene == "")]
 
 #Write output
-write.table(x = fast[,!grepl("desc", colnames(fast))], file = "fast_mpra_results_byguide.txt",
-            row.names = TRUE, col.names = TRUE, quote = FALSE, sep = "\t")
+write.table( x = fast[,!grepl("desc", colnames(fast))], 
+             file = file.path( datadir, "fast_mpra_results_byguide.txt" ),
+             row.names = TRUE, col.names = TRUE, quote = FALSE, sep = "\t")
 
-write.table(x = slow[,!grepl("desc", colnames(slow))], file = "slow_mpra_results_byguide.txt",
-            row.names = TRUE, col.names = TRUE, quote = FALSE, sep = "\t")
+write.table( x = slow[,!grepl("desc", colnames(slow))], 
+             file = file.path( datadir, "slow_mpra_results_byguide.txt" ),
+             row.names = TRUE, col.names = TRUE, quote = FALSE, sep = "\t")
 
+up_cutoff <- log2(2)
+diff_cutoff <- log2(1.5)
 
-# all genes within a strict set of bounds: slow foldchange > 1 or 1.5, slow foldchange - fast foldchange > 0.5
-slowupfc1 = slow$logFC > 1 & (slow$logFC - fast$logFC) > 0.5
-slowupfc1.5 = slow$logFC > 1.5 & (slow$logFC - fast$logFC) > 0.5
+slowup = slow$logFC > up_cutoff & (slow$logFC - fast$logFC) > diff_cutoff
+slowup_strict = slow$logFC > log2(3) & (slow$logFC - fast$logFC) > log2(1.5)
 
-write.table(slow$gene[slowupfc1], file = "slow_all_targets_up_fc1.txt", quote = F, row.names = F, col.names = F)
-write.table(slow$gene[slowupfc1.5], file = "slow_all_targets_up_fc1.5.txt", quote = F, row.names = F, col.names = F)
+# background set for GO analysis
+write.table( unique( slow$yorf ), 
+             file = file.path( datadir, "all_yorfs.txt" ), 
+             quote = F, row.names = F, col.names = F)
+# genes with direction of effect we want
+write.table( unique( slow$yorf[slowup] ), 
+             file = file.path( datadir, "slow_up.txt" ), 
+             quote = F, row.names = F, col.names = F)
+write.table( unique( slow$yorf[slowup_strict] ),
+             file = file.path( datadir, "slow_up_strict.txt" ),
+             quote = F, row.names = F, col.names = F)
 
+# most-up set: 
+# "FUN12" "OAF1"  "KIP1"  "RPG1"  "TRP1"  "SEC3"  "SEC27" "MPT5"  "TPN1"  "NOP7"  "NET1" 
+# "SMF3"  "NIP1"  "TOP2" 
+# 	formation of cytoplasmic translation initiation complex (3)	3.84e-3
+#   translational initiation (4)	9.16e-2
+# fun12, rpg1, nip1, [mpt5]

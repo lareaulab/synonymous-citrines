@@ -31,3 +31,24 @@ dev.off()
 png( file.path( figdir, "gated_fluor_data.png" ), width = 6, height = 6, units = "in", res = 300 )
 print( xyplot( Citrine.A ~ mCherry.A, data = flowDataGated, smooth = FALSE, ylim = c(0,2000), xlim = c(0,6000) ))
 dev.off()
+
+# convert the flowSet data to matrices then dataframes and combine them into one big dataframe
+gated_data <- fsApply( flowDataGated, exprs, simplify = F, use.exprs = F)
+gated_data <- lapply( gated_data, data.frame )
+gated_data <- ldply( gated_data )
+
+# compute the background to subtract
+citbackground <- gated_data %>%
+  dplyr::filter(.id == 'wt_by4743') %>%
+  select(Citrine.A) %>%
+  summarise(median = median(Citrine.A))
+# 69.72
+
+mchbackground <- gated_data %>%
+  dplyr::filter(.id == 'wt_by4743') %>%
+  select(mCherry.A) %>%
+  summarise(median = median(mCherry.A))
+# 42.75
+
+
+
