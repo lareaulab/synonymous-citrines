@@ -9,16 +9,16 @@ slow <- read.table( file.path( datadir, "slow_mpra_results_byguide.txt" ), heade
 slowsig <- slow$adj.P.Val < 0.05
 fastsig <-  fast$adj.P.Val < 0.05
 
-#diff_cutoff <- log2(1.5)
-diff_cutoff <- log2(2)
 up_cutoff <- log2(2)
+diff_cutoff <- log2(2)
+#diff_cutoff <- log2(1.5)
 
 slowup <-  slow$logFC > up_cutoff & (slow$logFC - fast$logFC) > diff_cutoff
 
 hits <- slowsig & slowup
 
-eif_diff_cutoff <- log2(1.5)
 eif_up_cutoff <- log2(2)
+eif_diff_cutoff <- log2(1.5)
 eif_up <-  slow$logFC > eif_up_cutoff & (slow$logFC - fast$logFC) > eif_diff_cutoff
 
 # 9 genes with term "formation of cytoplasmic translation initiation complex"
@@ -85,3 +85,28 @@ text( fast$logFC[eif_hits & !fun12], slow$logFC[eif_hits & !fun12], labels = slo
 text( fast$logFC[fun12], slow$logFC[fun12], labels = slow$gene[fun12], pos = 4, col = "palegreen3" ) 
 
 dev.off()
+
+
+## write out table of all significant hits for supplemental data
+## save the log2fc, adjusted p-val, gene id, and gene symbol
+allsig <-  merge( slow[,c(1,5,7,9)], fast[,c(1,5,7,9)],
+                  by = c("row.names","yorf", "gene"), suffixes=c(".slow", ".fast"))
+names(allsig)[1] <- "guide"
+allsig <- allsig[ allsig$adj.P.Val.slow < 0.05 | allsig$adj.P.Val.fast < 0.05, ]
+write.table( x = allsig, 
+             file = file.path( figdir, "ciber_sig_guides.tsv" ),
+             row.names = F, col.names = TRUE, quote = F, sep = "\t")
+
+
+## write out table of things used for the GO enrichment analysis:
+
+go_out <-  merge( slow[,c(1,5,7,9)], fast[,c(1,5,7,9)],
+                  by = c("row.names","yorf", "gene"), suffixes=c(".slow", ".fast"))
+names(go_out)[1] <- "guide"
+
+go_cutoffs <- go_out$logFC.slow > eif_up_cutoff & (go_out$logFC.slow - go_out$logFC.fast) > eif_diff_cutoff
+go_out <- go_out[ go_cutoffs, ]
+write.table( x = go_out, 
+             file = file.path( figdir, "ciber_guides_go.tsv" ),
+             row.names = F, col.names = TRUE, quote = F, sep = "\t")
+
